@@ -1,0 +1,82 @@
+---
+const { photoUrl, title, description } = Astro.props;
+---
+
+<body>
+  <div class="container">
+    <img src={photoUrl} />
+    <div class="textArea">
+      <h1>{title}</h1>
+      <p>
+        {
+          description.length < 280
+            ? description
+            : description.substring(0, 280) + "..."
+        }
+      </p>
+    </div>
+    <div class="buttonArea">
+      <div class="learnMoreButton">Learn more</div>
+    </div>
+  </div>
+</body>
+
+<style>
+  .container {
+    width: 28rem;
+    height: 36rem;
+
+    background-color: white;
+    box-shadow: 0.2rem 0.2rem 0.8rem darkgray;
+  }
+
+  .container img {
+    width: 100%;
+    height: 18rem;
+  }
+
+  .textArea {
+    height: 8.25rem;
+    padding: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .buttonArea {
+    width: 100%;
+    height: 6.5rem;
+
+    display: flex;
+    justify-content: right;
+    align-items: end;
+  }
+
+  .learnMoreButton {
+    width: 13rem;
+    height: 3.5rem;
+
+    margin: 1rem;
+
+    border-radius: 1.75rem;
+
+    color: rgb(255, 255, 255);
+    background-color: rgb(20, 20, 20);
+
+    box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.164);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+      width 0.3s,
+      height 0.3s;
+  }
+
+  .learnMoreButton:hover {
+    width: 14rem;
+    height: 3.75rem;
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import Article from "./Article.astro";
+const { items } = Astro.props;
+
+type propertys = {
+  photoUrl: string;
+  title: string;
+  description: string;
+};
+---
+
+<body>
+  <div class="container">
+    {
+      items.map((item:propertys) => (
+        <Article
+          photoUrl={item.photoUrl}
+          title={item.title}
+          description={item.description}
+        />
+      ))
+    }
+  </div>
+</body>
+<style>
+  .container {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+</style>
