@@ -1,5 +1,5 @@
 ---
-const { photoUrl = 'test', title = 'test', content = 'test' } = Astro.props;
+const {slug='test', photoUrl = 'test', title = 'test', content = 'test' } = Astro.props;
 ---
 
 <body>
@@ -16,7 +16,7 @@ const { photoUrl = 'test', title = 'test', content = 'test' } = Astro.props;
       </p>
     </div>
     <div class="buttonArea">
-      <div class="learnMoreButton">Learn more</div>
+      <a class="learnMoreButton" href={`/${slug}/`}>Learn more</a>
     </div>
   </div>
 </body>

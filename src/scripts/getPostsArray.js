@@ -1,3 +1,13 @@
+function getImageUrlById(id, wpMediaJson) {
+
+  const result = wpMediaJson.find((inputMedia) => {
+    if (id === inputMedia.post) {
+        return true;
+    }
+});
+return result ? result.source_url : null;
+}
+
 export async function getPostsArray(Wordpresslink) {
   const posts = await fetch(`${Wordpresslink}/wp-json/wp/v2/posts`);
   const postsJson = await posts.json();
@@ -5,15 +15,7 @@ export async function getPostsArray(Wordpresslink) {
   const media = await fetch(`${Wordpresslink}/wp-json/wp/v2/media`);
   const mediaJson = await media.json();
 
-  function getImageUrlById(id, wpMediaJson) {
-    return wpMediaJson.find((inputMedia) => {
-      if (id === inputMedia.post) {
-        return inputMedia.source_url;
-      }
-    });
-  }
-
-  const result =  postsJson.map((neededPostData) => {
+  const result = postsJson.map((neededPostData) => {
     return {
       slug: neededPostData.slug,
       photoUrl: getImageUrlById(neededPostData.id, mediaJson),
@@ -25,6 +27,11 @@ export async function getPostsArray(Wordpresslink) {
   return result;
 }
 
-console.log('test');
 
-console.log(await getPostsArray('http://whellworks.local'));
+
+// const media = await fetch(`http://whellworks.local/wp-json/wp/v2/media`);
+// const mediaJson = await media.json();
+
+// console.log(getImageUrlById(14,mediaJson)); 
+
+// console.log(await getPostsArray('http://whellworks.local'));

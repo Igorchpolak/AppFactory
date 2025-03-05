@@ -27,6 +27,7 @@ var items = await getPostsArray('http://whellworks.local/');
     {
       items.map((item: propertys) => (
         <Article
+          slug ={item.slug}
           photoUrl ={item.photoUrl}
           title={item.title}
           content={item.content}

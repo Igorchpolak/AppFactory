@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import { getPostsArray } from "../scripts/getPostsArray.js";
+
+export async function getStaticPaths() {
+  var posts = await getPostsArray("http://whellworks.local/");
+
+
+  return posts.map(({ slug, photoUrl, title, content }) => {
+    return {
+      params: { slug },
+      props: { photoUrl, title, content },
+    };
+  });
+}
+
+const { photoUrl, title, content } = Astro.props;
+---
+
+
+<Layout>
+    <Header/>
+    <h1>{title}</h1>
+    <p>{content}</p>
+</Layout>
+
