@@ -25,16 +25,13 @@ const simplifiedPosts = postsJson.map((post) => {
 
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
-import ArticleTypeChooseBar from "../components/ArticleTypeChooseBar.astro"
 import Articles from '../components/Articles.astro'
-import Find from '../components/Find.astro';
+
 ---
 
 <Layout>
 	<Header/>
-	<!-- <ArticleTypeChooseBar/> -->
 	<Articles items={simplifiedPosts}/>	
-    <Find/>
 </Layout>
 <style is:global>
 	@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
