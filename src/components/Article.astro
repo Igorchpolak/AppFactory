@@ -1,5 +1,5 @@
 ---
-const { photoUrl, title, description } = Astro.props;
+const { photoUrl = 'test', title = 'test', content = 'test' } = Astro.props;
 ---
 
 <body>
@@ -9,9 +9,9 @@ const { photoUrl, title, description } = Astro.props;
       <h1>{title}</h1>
       <p>
         {
-          description.length < 280
-            ? description
-            : description.substring(0, 280) + "..."
+          content.length < 280
+            ? content
+            : content.substring(0, 280) + "..."
         }
       </p>
     </div>

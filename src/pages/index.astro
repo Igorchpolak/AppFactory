@@ -1,37 +1,17 @@
 ---
-const posts = await fetch("http://whellworks.local/wp-json/wp/v2/posts");
-const postsJson = await posts.json();
-
-const image = await fetch("http://whellworks.local/wp-json/wp/v2/media");
-const imageJson = await image.json();
-
-const getUrlById = function(id, inputJson) {
-    const result = inputJson.find((input) => {
-        if (id === input.post) {
-            return true;
-        }
-    });
-    return result ? result.source_url : null;
-};
-
-const simplifiedPosts = postsJson.map((post) => {
-    return {
-        photoUrl: getUrlById(post.id, imageJson),
-        title: post.title.rendered,
-        description: post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, ""), // Remove HTML tags
-        categories: post.categories
-    };
-});
+import { getPostsArray } from '../scripts/getPostsArray.js';
 
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import Articles from '../components/Articles.astro'
 
+const posts = getPostsArray('http://whellworks.local/')
 ---
 
 <Layout>
 	<Header/>
-	<Articles items={simplifiedPosts}/>	
+    <!-- <pre> {posts}</pre> -->
+	<Articles/>	
 </Layout>
 <style is:global>
 	@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");

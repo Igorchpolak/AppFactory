@@ -1,24 +1,30 @@
-async function getPostArray(Wordpresslink) {
+export async function getPostsArray(Wordpresslink) {
   const posts = await fetch(`${Wordpresslink}/wp-json/wp/v2/posts`);
   const postsJson = await posts.json();
 
   const media = await fetch(`${Wordpresslink}/wp-json/wp/v2/media`);
-  const mediaJson = await image.json();
+  const mediaJson = await media.json();
 
-  const getImageUrlById = function (id, wpMediaJson) {
+  function getImageUrlById(id, wpMediaJson) {
     return wpMediaJson.find((inputMedia) => {
-      if (id === wpMediaJson.post) {
-            return inputMedia.source_url;
+      if (id === inputMedia.post) {
+        return inputMedia.source_url;
       }
     });
-  };
+  }
 
-  return postsJson.map((neededPostData) => {
-    return{
-        slug: neededPostData.slug,
-        photoUrl: neededPostData.getImageUrlById(neededPostData.id, mediaJson),
-        title: neededPostData.title,
-        content: neededPostData.content,
-    }
+  const result =  postsJson.map((neededPostData) => {
+    return {
+      slug: neededPostData.slug,
+      photoUrl: getImageUrlById(neededPostData.id, mediaJson),
+      title: neededPostData.title.rendered,
+      content: neededPostData.content.rendered,
+    };
   });
-};
+
+  return result;
+}
+
+console.log('test');
+
+console.log(await getPostsArray('http://whellworks.local'));
