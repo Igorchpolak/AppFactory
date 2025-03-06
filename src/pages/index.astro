@@ -1,18 +1,27 @@
 ---
-import { getPostsArray } from '../scripts/getPostsArray.js';
+import { getPostsArray } from "../scripts/getPostsArray.js";
 
-import Header from '../components/Header.astro';
-import Layout from '../layouts/Layout.astro';
-import Articles from '../components/Articles.astro'
+import Search from "astro-pagefind/components/Search";
 
-const posts = getPostsArray('http://whellworks.local/')
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+import AllArticles from "../components/AllArticles.astro";
+
+const posts = getPostsArray("http://whellworks.local/");
 ---
 
 <Layout>
-	<Header/>
-    <!-- <pre> {posts}</pre> -->
-	<Articles/>	
+  <!-- <Header /> -->
+
+  <Search
+    id="search"
+    className="pagefind-ui"
+    uiOptions={{ showImages: false }}
+  />
+
+  <h1>test1</h1>
+  <h1>test2</h1>
+
+  <!-- <pre> {posts}</pre> -->
+  <!-- <AllArticles /> -->
 </Layout>
-<style is:global>
-	
-  </style>
