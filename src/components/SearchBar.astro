@@ -1,0 +1,49 @@
+---
+import Search from "astro-pagefind/components/Search";
+---
+
+<div class="container mx-auto">
+  <div class="searchContainer ">
+    <Search
+      id="search"
+      className="pagefind-ui"
+      uiOptions={{ showImages: false }}
+    />
+  </div>
+</div>
+
+<style is:global>
+  .container {
+    height: 8.5rem;
+    width: 100%;
+    /* @apply w-10 bg-blue-400; */
+  }
+  .searchContainer {
+    z-index: 100;
+
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+
+    border-radius: 1.8rem;
+
+    transform: translateX(-50%);
+  }
+
+  .pagefind-ui {
+    --pagefind-ui-scale: 0.75;
+    --pagefind-ui-primary: black;
+    --pagefind-ui-text: black;
+    --pagefind-ui-border: #111827;
+    --pagefind-ui-border-width: 0.15rem;
+    --pagefind-ui-border-radius: 0.25rem;
+    --pagefind-ui-font: sans-serif;
+    width: 50rem;
+  }
+
+  .pagefind-ui .pagefind-ui__drawer {
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0rem 0rem 1rem -0.5rem #888888;
+  }
+</style>

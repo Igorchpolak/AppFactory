@@ -1,7 +1,7 @@
 ---
 import { getPostsArray } from "../scripts/getPostsArray.js";
 
-import Search from "astro-pagefind/components/Search";
+import SearchBar from "../components/SearchBar.astro";
 
 import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
@@ -12,16 +12,7 @@ const posts = getPostsArray("http://whellworks.local/");
 
 <Layout>
   <!-- <Header /> -->
+  <SearchBar/>
 
-  <Search
-    id="search"
-    className="pagefind-ui"
-    uiOptions={{ showImages: false }}
-  />
-
-  <h1>test1</h1>
-  <h1>test2</h1>
-
-  <!-- <pre> {posts}</pre> -->
-  <!-- <AllArticles /> -->
+  <AllArticles />
 </Layout>

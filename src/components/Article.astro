@@ -7,12 +7,12 @@ const {slug='test', photoUrl = 'test', title = 'test', content = 'test' } = Astr
     <img src={photoUrl} />
     <div class="textArea">
       <h1>{title}</h1>
-      <p>
-        {
-          content.length < 280
-            ? content
-            : content.substring(0, 280) + "..."
-        }
+      <p set:html={
+        content.length < 280
+          ? content
+          : content.substring(0, 280) + "..."
+      }>
+        
       </p>
     </div>
     <div class="buttonArea">
