@@ -34,4 +34,4 @@ export async function getPostsArray(Wordpresslink) {
 
 // console.log(getImageUrlById(14,mediaJson)); 
 
-// console.log(await getPostsArray('http://whellworks.local'));
+console.log(await getPostsArray('http://whellworks.local'));

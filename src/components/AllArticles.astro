@@ -1,8 +1,7 @@
 ---
 import Article from "./Article.astro";
 import { getPostsArray } from "../scripts/getPostsArray.js";
-
-const {items} =Astro.props;
+import { getPostsArrayFromCategory } from "../scripts/getPostsFromCategory";
 
 type propertys = {
   slug: string;
@@ -11,20 +10,18 @@ type propertys = {
   content: string;
 };
 
+const {categoryId} =Astro.props;
 
 
-// const items = [
-//   {
-//     slug: "test1",
-//     photoUrl: "test2",
-//     title: "test3",
-//     content: "test1",
-//   },
-// ];
-
+if(categoryId){
+  var items = await getPostsArrayFromCategory(categoryId,"http://whellworks.local/");
+}else{
+  var items = await getPostsArray("http://whellworks.local/");
+}
 ---
 
 <body>
+  <h1>{categoryId}</h1>
   <div class="container mx-auto">
     {
       items.map((item: propertys) => (

@@ -27,4 +27,4 @@ export async function getPostsArrayFromCategory(categoryId, Wordpresslink) {
   return result;
 }
 
-console.log(await getPostsArrayFromCategory(2,'http://whellworks.local'));
+// console.log(await getPostsArrayFromCategory(1,'http://whellworks.local'));
