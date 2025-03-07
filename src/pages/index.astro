@@ -7,12 +7,10 @@ import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
 import AllArticles from "../components/AllArticles.astro";
 
-const posts = getPostsArray("http://whellworks.local/");
+var posts = await getPostsArray("http://whellworks.local/");
 ---
 
 <Layout>
-  <!-- <Header /> -->
   <SearchBar/>
-
-  <AllArticles />
+  <AllArticles items={posts}/>
 </Layout>

@@ -1,5 +1,21 @@
 ---
-import Search from "astro-pagefind/components/Search";
+import {getCategoriesArray} from '../scripts/getCategoriesArray'
+
+
+type propertys = {
+  category: string;
+  name: string;
+  id: number;
+};
+
+var categories = await getCategoriesArray('http://whellworks.local/');
+
+// const categories = [
+//   {category: "test1",
+//     name:"test1",
+//     id: 1,
+//   }
+// ]
 ---
 
 <nav
@@ -17,13 +33,12 @@ import Search from "astro-pagefind/components/Search";
         >WheelWorks.com</span
       >
     </a>
-<!-- 
+    <!-- 
     <div class="w-10">
         <Search id="search1"  className="pagefind-ui yellow" uiOptions={{ showImages: false }} />
       </div> -->
 
     <div class="flex md:order-1">
-      
       <ul
         class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
       >
@@ -39,7 +54,7 @@ import Search from "astro-pagefind/components/Search";
             id="dropdownNavbarLink"
             data-dropdown-toggle="dropdownNavbar"
             class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-            >Dropdown <svg
+            >Categories <svg
               class="w-2.5 h-2.5 ms-2.5"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
@@ -57,41 +72,20 @@ import Search from "astro-pagefind/components/Search";
           <!-- Dropdown menu -->
           <div
             id="dropdownNavbar"
-            class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600"
+            class=" hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600"
           >
             <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-400"
+              class="z-100 py-2 text-sm text-gray-700 dark:text-gray-400"
               aria-labelledby="dropdownLargeButton"
             >
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Dashboard</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Settings</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Earnings</a
-                >
-              </li>
+              {
+                categories.map((item : propertys) => (
+                  <li class="z-100">
+                    <a href={`/${item.category}/`}class=" block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{item.name}</a>
+                  </li>
+                ))
+              }
             </ul>
-            <div class="py-1">
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >Sign out</a
-              >
-            </div>
           </div>
         </li>
         <li></li>

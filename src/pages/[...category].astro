@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {getCategoriesArray} from '../scripts/getCategoriesArray'
+
+export async function getStaticPaths() {
+    var categories = await getCategoriesArray("http://whellworks.local/");
+
+//   const categories = [{ category: "test1", name: "test1", id: 1 }];
+
+  return categories.map(({ category, name, id }) => {
+    return {
+      params: { category },
+      props: { name, id },
+    };
+  });
+}
+
+const { name, id } = Astro.props;
+---
+
+<Layout>
+  <h1>{name}</h1>
+  <p set:html={id} />
+</Layout>

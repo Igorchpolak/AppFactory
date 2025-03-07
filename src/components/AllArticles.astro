@@ -2,6 +2,8 @@
 import Article from "./Article.astro";
 import { getPostsArray } from "../scripts/getPostsArray.js";
 
+const {items} =Astro.props;
+
 type propertys = {
   slug: string;
   photoUrl: string;
@@ -9,7 +11,7 @@ type propertys = {
   content: string;
 };
 
-var items = await getPostsArray('http://whellworks.local/');
+
 
 // const items = [
 //   {
