@@ -1,0 +1,79 @@
+---
+import { getPostsArray } from "../scripts/getPostsArray.js";
+
+import Layout from "../layouts/Layout.astro";
+
+import SearchBar from "../components/SearchBar.astro";
+import Article from "../components/Article.astro";
+import PrevButton from "../components/PrevButton.astro";
+import NextButton from "../components/NextButton.astro";
+
+//@ts-ignore
+function generateNextUrl(routeAdress=0) {
+  //@ts-ignore
+  if (routeAdress) {
+    //@ts-ignore
+    return `${routeAdress}/${page.currentPage + 1}`;
+  } else {
+    //@ts-ignore
+    return `/${page.currentPage + 1}`;
+  }
+}
+
+//@ts-ignore
+function generatePrevUrl(routeAdress=0) {
+  if (routeAdress) {
+    //@ts-ignore
+    if (page.currentPage > 2) {
+      //@ts-ignore
+      return `${routeAdress}/${page.currentPage - 1}`;
+    } else {
+      return `${routeAdress}/`;
+    }
+  } else {
+    //@ts-ignore
+    if (page.currentPage > 2) {
+      //@ts-ignore
+      return `/${page.currentPage - 1}`;
+    } else {
+      return `/`;
+    }
+  }
+}
+
+type propertys = {
+  slug: string;
+  photoUrl: string;
+  title: string;
+  content: string;
+};
+
+//@ts-ignore
+export async function getStaticPaths({ paginate }) {
+  var posts = await getPostsArray("http://whellworks.local");
+  return paginate(posts, { pageSize: 6 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout>
+  <SearchBar />
+  <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
+    {
+      //@ts-ignore
+      page.data.map((post: propertys) => (
+        <Article
+          slug={post.slug}
+          photoUrl={post.photoUrl}
+          title={post.title}
+          content={post.content}
+        />
+      ))
+    }
+  </div>
+  <div class="mx-auto w-full flex justify-center mb-5 gap-5">
+    <PrevButton inputHref={generatePrevUrl()} />
+    <NextButton inputHref={generateNextUrl()} />
+  </div>
+</Layout>

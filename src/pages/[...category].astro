@@ -1,8 +1,13 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import {getCategoriesArray} from '../scripts/getCategoriesArray'
+
+import Layout from "../layouts/Layout.astro";
+
 import SearchBar from "../components/SearchBar.astro";
 import AllArticles from "../components/AllArticles.astro";
+import Article from "../components/Article.astro";
+import PrevButton from "../components/PrevButton.astro";
+import NextButton from "../components/NextButton.astro";
 
 export async function getStaticPaths() {
     var categories = await getCategoriesArray("http://whellworks.local/");
