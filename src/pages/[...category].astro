@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import {getCategoriesArray} from '../scripts/getCategoriesArray'
-import { getPostsArrayFromCategory } from "../scripts/getPostsFromCategory";
+import SearchBar from "../components/SearchBar.astro";
 import AllArticles from "../components/AllArticles.astro";
 
 export async function getStaticPaths() {
@@ -19,6 +19,6 @@ const { name, id } = Astro.props;
 ---
 
 <Layout>
-  <h1>{name}</h1>
+  <SearchBar/>
   <AllArticles categoryId={id}/>
 </Layout>

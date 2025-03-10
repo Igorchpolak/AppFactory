@@ -19,7 +19,22 @@ const { photoUrl, title, content } = Astro.props;
 
 
 <Layout>
-    <h1>{title}</h1>
-    <p set:html={content}></p>
+  <div class="w-full flex justify-center items-center flex-col">
+    <img class="aspect-3/2 object-cover w-250 m-10 rounded-3xl shadow-2xl" src={photoUrl}>
+    <div class="w-250 slug">
+      <h1 class="mb-3 text-4xl font-bold tracking-tight text-black">{title}</h1>
+      <p class="mb-2 " set:html={content}></p>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  .slug{
+    font-size:1.2rem;
+  }
+
+  .slug h3{
+    color: red;
+  }
+</style>
 
