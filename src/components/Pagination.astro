@@ -1,0 +1,114 @@
+---
+const { currentPage, lastPage, url } = Astro.props;
+
+// Generate previous and next page URLs
+const prevUrl = url.prev;
+const nextUrl = url.next;
+
+// Generate page numbers to display
+const pageNumbers = [];
+const displayPageCount = 5; // Number of page numbers to display
+
+let startPage = Math.max(1, currentPage - Math.floor(displayPageCount / 2));
+let endPage = Math.min(lastPage, startPage + displayPageCount - 1);
+
+// Adjust start page if we're near the end
+if (endPage - startPage + 1 < displayPageCount) {
+  startPage = Math.max(1, endPage - displayPageCount + 1);
+}
+
+for (let i = startPage; i <= endPage; i++) {
+  pageNumbers.push(i);
+}
+---
+
+<nav class="flex justify-center my-8" aria-label="Pagination">
+  <ul class="flex items-center space-x-1">
+    <!-- Previous button -->
+    <li>
+      {prevUrl ? (
+        <a 
+          href={prevUrl} 
+          class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+          aria-label="Go to previous page"
+        >
+          &laquo;
+        </a>
+      ) : (
+        <span class="px-3 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600">
+          &laquo;
+        </span>
+      )}
+    </li>
+    
+    <!-- Page 1 and ellipsis if needed -->
+    {startPage > 1 && (
+      <>
+        <li>
+          <a 
+            href={`/blog`} 
+            class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+          >
+            1
+          </a>
+        </li>
+        {startPage > 2 && (
+          <li>
+            <span class="px-3 py-2 dark:text-gray-300">...</span>
+          </li>
+        )}
+      </>
+    )}
+    
+    <!-- Page numbers -->
+    {pageNumbers.map(num => (
+      <li>
+        <a 
+          href={num === 1 ? `/blog` : `/blog/${num}`} 
+          class={`px-3 py-2 rounded-lg ${num === currentPage 
+            ? 'bg-blue-700 text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700' 
+            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200'}`}
+          aria-current={num === currentPage ? 'page' : undefined}
+        >
+          {num}
+        </a>
+      </li>
+    ))}
+    
+    <!-- Ellipsis and last page if needed -->
+    {endPage < lastPage && (
+      <>
+        {endPage < lastPage - 1 && (
+          <li>
+            <span class="px-3 py-2 dark:text-gray-300">...</span>
+          </li>
+        )}
+        <li>
+          <a 
+            href={`/blog/${lastPage}`} 
+            class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+          >
+            {lastPage}
+          </a>
+        </li>
+      </>
+    )}
+    
+    <!-- Next button -->
+    <li>
+      {nextUrl ? (
+        <a 
+          href={nextUrl} 
+          class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+          aria-label="Go to next page"
+        >
+          &raquo;
+        </a>
+      ) : (
+        <span class="px-3 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600">
+          &raquo;
+        </span>
+      )}
+    </li>
+  </ul>
+</nav>

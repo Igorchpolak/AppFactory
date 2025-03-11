@@ -81,7 +81,7 @@ var categories = await getCategoriesArray('http://whellworks.local/');
               {
                 categories.map((item : propertys) => (
                   <li class="z-100">
-                    <a href={`/${item.category}/`}class=" block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{item.name}</a>
+                    <a href={`/category/${item.category}/`}class=" block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{item.name}</a>
                   </li>
                 ))
               }

@@ -1,86 +1,81 @@
 ---
-import {
-  getPostsArray,
-  makePageNumbersArray,
-  getPagePostsArray,
-} from "../scripts/scripts.js";
-
 import Layout from "../layouts/Layout.astro";
-
-import SearchBar from "../components/SearchBar.astro";
 import Article from "../components/Article.astro";
-import PrevButton from "../components/PrevButton.astro";
-import NextButton from "../components/NextButton.astro";
-
-type propertys = {
-  slug: string;
-  photoUrl: string;
-  title: string;
-  content: string;
-};
+import Pagination from "../components/Pagination.astro";
+import SearchBar from "../components/SearchBar.astro";
 
 export async function getStaticPaths() {
-  const paginationPagesNames = await makePageNumbersArray(
-    "http://whellworks.local",6
+  // First, get the total count of posts to calculate pagination
+  const countResponse = await fetch(
+    "http://whellworks.local/wp-json/wp/v2/posts?per_page=1"
   );
+  const totalPosts = parseInt(countResponse.headers.get("X-WP-Total") || "0");
+  const postsPerPage = 6; // Set to display 5 posts per page
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
 
-  var postsForPage:[] = [];
-  for (let i=1; i<=paginationPagesNames.length;i++){
-    //@ts-ignore
-    postsForPage.push(await getPagePostsArray(6,i,"http://whellworks.local"));
-  }
-
-  return paginationPagesNames.map(({ page }) => {
-    const posts = postsForPage[page-1];
-    return { params: { page }, props: { posts } };
+  // Generate page routes, but don't fetch content yet
+  const paths = Array.from({ length: totalPages }, (_, i) => {
+    return {
+      params: { page: i === 0 ? undefined : (i + 1).toString() },
+      props: {
+        currentPage: i + 1,
+        totalPages,
+        totalPosts,
+        postsPerPage,
+      },
+    };
   });
+
+  return paths;
 }
 
-const {posts}= Astro.props;
+// Get page details from props
+const { currentPage, totalPages, totalPosts, postsPerPage } = Astro.props;
+
+// Now fetch only the posts needed for this specific page
+const offset = (currentPage - 1) * postsPerPage;
+const response = await fetch(
+  `http://whellworks.local/wp-json/wp/v2/posts?_embed&per_page=${postsPerPage}&offset=${offset}`
+);
+const posts = await response.json();
+
+// Create pagination URLs for the component
+const url = {
+  prev:
+    currentPage > 1
+      ? currentPage === 2
+        ? "/"
+        : `/${currentPage - 1}`
+      : null,
+  next: currentPage < totalPages ? `/${currentPage + 1}` : null,
+  current: currentPage === 1 ? "/" : `/${currentPage}`,
+};
 ---
 
-<Layout>
-  <SearchBar />
-  <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
-    {
-      //@ts-ignore
-      posts.map((post: propertys) => (
+<Layout title={`Blog - Page ${currentPage}`}>
+  <SearchBar/>
+  <div class="container mx-auto">
+    <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
+      {
+        posts.map((post) => (
         <Article
-          slug={post.slug}
-          photoUrl={post.photoUrl}
-          title={post.title}
-          content={post.content}
-        />
-      ))
-    }
-  </div>
-  <div class="mx-auto w-full flex justify-center mb-5 gap-5">
-    <!-- <PrevButton inputHref={generatePrevUrl()} /> -->
-    <!-- <NextButton class="nextButton" /> -->
-    <!-- <button class="prevPage">prev</button>
-    <button class="nextPage">next</button> -->
+              title={post.title.rendered}
+              content={post.content.rendered}
+              slug={post.slug}
+              date={new Date(post.date).toLocaleDateString()}
+              photoUrl={
+                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null
+              }
+            />
+        ))
+      }
+    </div>
+
+    <Pagination currentPage={currentPage} lastPage={totalPages} url={url} />
+
+    <div class="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
+      Showing posts {offset + 1}-{Math.min(offset + postsPerPage, totalPosts)} of
+      {totalPosts}
+    </div>
   </div>
 </Layout>
-
-<!-- <script>
-  var currentPage = 1;
-
-  const nextButton = document.querySelectorAll("button.nextPage");
-  const prevButton = document.querySelectorAll("button.prevPage");
-
-  nextButton.forEach((button) => {
-    button.addEventListener("click", () => {
-      currentPage++;
-      alert("test" + currentPage);
-    });
-  });
-
-  prevButton.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        alert("test" + currentPage);
-      }
-    });
-  });
-</script> -->

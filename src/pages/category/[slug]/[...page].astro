@@ -1,0 +1,127 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Article from "../../../components/Article.astro";
+import SearchBar from "../../../components/SearchBar.astro";
+import Pagination from "../../../components/Pagination.astro";
+
+// Define static paths for categories with pagination
+export async function getStaticPaths() {
+  // Fetch all categories from WordPress
+  const categoriesResponse = await fetch(
+    "http://whellworks.local/wp-json/wp/v2/categories"
+  );
+  const categories = await categoriesResponse.json();
+
+  // Create an array to store all paths
+  const paths = [];
+
+  // For each category, create paginated routes
+  for (const category of categories) {
+    // Get post count for this category
+    const countResponse = await fetch(
+      `http://whellworks.local/wp-json/wp/v2/posts?categories=${category.id}&per_page=1`
+    );
+    const totalPosts = parseInt(countResponse.headers.get("X-WP-Total") || "0");
+    const postsPerPage = 6;
+    const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+    // Generate paths for each page in this category
+    for (let i = 0; i < totalPages; i++) {
+      paths.push({
+        params: {
+          slug: category.slug,
+          page: i === 0 ? undefined : (i + 1).toString(),
+        },
+        props: {
+          category: {
+            id: category.id,
+            name: category.name,
+            slug: category.slug,
+            description: category.description,
+          },
+          currentPage: i + 1,
+          totalPages,
+          totalPosts,
+          postsPerPage,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+// Get page details from props
+const { category, currentPage, totalPages, totalPosts, postsPerPage } =
+  Astro.props;
+
+// Now fetch only the posts needed for this specific category and page
+const offset = (currentPage - 1) * postsPerPage;
+const response = await fetch(
+  `http://whellworks.local/wp-json/wp/v2/posts?_embed&categories=${category.id}&per_page=${postsPerPage}&offset=${offset}`
+);
+const posts = await response.json();
+
+// Create pagination URLs for the component
+const url = {
+  prev:
+    currentPage > 1
+      ? currentPage === 2
+        ? `/category/${category.slug}`
+        : `/category/${category.slug}/${currentPage - 1}`
+      : null,
+  next:
+    currentPage < totalPages
+      ? `/category/${category.slug}/${currentPage + 1}`
+      : null,
+  current:
+    currentPage === 1
+      ? `/category/${category.slug}`
+      : `/category/${category.slug}/${currentPage}`,
+};
+---
+
+<Layout>
+  <SearchBar />
+  <div class="container mx-auto">
+    <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
+      <!-- Main Content Area -->
+
+      {
+        posts.length > 0 ? (
+          posts.map((post) => (
+            <Article
+              title={post.title.rendered}
+              content={post.content.rendered}
+              slug={post.slug}
+              date={new Date(post.date).toLocaleDateString()}
+              photoUrl={
+                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null
+              }
+            />
+          ))
+        ) : (
+          <div class="col-span-full text-center py-12">
+            <p class="text-xl text-gray-700 dark:text-gray-300">
+              No posts found in this category.
+            </p>
+          </div>
+        )
+      }
+    </div>
+
+    {
+      totalPosts > postsPerPage && (
+        <Pagination currentPage={currentPage} lastPage={totalPages} url={url} />
+      )
+    }
+
+    <div class="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
+      {
+        totalPosts > 0
+          ? `Showing posts ${offset + 1}-${Math.min(offset + postsPerPage, totalPosts)} of ${totalPosts} in ${category.name}`
+          : `0 posts in ${category.name}`
+      }
+    </div>
+  </div>
+</Layout>
