@@ -1,5 +1,6 @@
 ---
-import {getCategoriesArray} from '../scripts/getCategoriesArray'
+// import { getPostsArrayFromCategory } from "../scripts/getPostsFromCategory";
+import { getPostsArray,getCategoriesArray,makePageNumbersArray} from "../scripts/scripts";
 
 import Layout from "../layouts/Layout.astro";
 
@@ -8,22 +9,30 @@ import AllArticles from "../components/AllArticles.astro";
 import Article from "../components/Article.astro";
 import PrevButton from "../components/PrevButton.astro";
 import NextButton from "../components/NextButton.astro";
+var categories = await getCategoriesArray("http://whellworks.local/");
 
 export async function getStaticPaths() {
     var categories = await getCategoriesArray("http://whellworks.local/");
+    var allpost = await getPostsArray("http://whellworks.local/");
 
-  return categories.map(({ category, name, id }) => {
+  return categories.map(({ category,count, name, id }) => {
     return {
-      params: { category },
+      params: { category, count},
       props: { name, id },
     };
   });
+
+  // return [{params: "bikes"}]
 }
 
 const { name, id } = Astro.props;
+
+
 ---
 
 <Layout>
-  <SearchBar/>
+  <SearchBar />
+  <!-- <AllArticles categoryId={id}/> -->
   <AllArticles categoryId={id}/>
+
 </Layout>

@@ -1,5 +1,9 @@
 ---
-import { getPostsArray } from "../scripts/getPostsArray.js";
+import {
+  getPostsArray,
+  makePageNumbersArray,
+  getPagePostsArray,
+} from "../scripts/scripts.js";
 
 import Layout from "../layouts/Layout.astro";
 
@@ -8,39 +12,6 @@ import Article from "../components/Article.astro";
 import PrevButton from "../components/PrevButton.astro";
 import NextButton from "../components/NextButton.astro";
 
-//@ts-ignore
-function generateNextUrl(routeAdress=0) {
-  //@ts-ignore
-  if (routeAdress) {
-    //@ts-ignore
-    return `${routeAdress}/${page.currentPage + 1}`;
-  } else {
-    //@ts-ignore
-    return `/${page.currentPage + 1}`;
-  }
-}
-
-//@ts-ignore
-function generatePrevUrl(routeAdress=0) {
-  if (routeAdress) {
-    //@ts-ignore
-    if (page.currentPage > 2) {
-      //@ts-ignore
-      return `${routeAdress}/${page.currentPage - 1}`;
-    } else {
-      return `${routeAdress}/`;
-    }
-  } else {
-    //@ts-ignore
-    if (page.currentPage > 2) {
-      //@ts-ignore
-      return `/${page.currentPage - 1}`;
-    } else {
-      return `/`;
-    }
-  }
-}
-
 type propertys = {
   slug: string;
   photoUrl: string;
@@ -48,13 +19,24 @@ type propertys = {
   content: string;
 };
 
-//@ts-ignore
-export async function getStaticPaths({ paginate }) {
-  var posts = await getPostsArray("http://whellworks.local");
-  return paginate(posts, { pageSize: 6 });
+export async function getStaticPaths() {
+  const paginationPagesNames = await makePageNumbersArray(
+    "http://whellworks.local",6
+  );
+
+  var postsForPage:[] = [];
+  for (let i=1; i<=paginationPagesNames.length;i++){
+    //@ts-ignore
+    postsForPage.push(await getPagePostsArray(6,i,"http://whellworks.local"));
+  }
+
+  return paginationPagesNames.map(({ page }) => {
+    const posts = postsForPage[page-1];
+    return { params: { page }, props: { posts } };
+  });
 }
 
-const { page } = Astro.props;
+const {posts}= Astro.props;
 ---
 
 <Layout>
@@ -62,7 +44,7 @@ const { page } = Astro.props;
   <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
     {
       //@ts-ignore
-      page.data.map((post: propertys) => (
+      posts.map((post: propertys) => (
         <Article
           slug={post.slug}
           photoUrl={post.photoUrl}
@@ -73,7 +55,32 @@ const { page } = Astro.props;
     }
   </div>
   <div class="mx-auto w-full flex justify-center mb-5 gap-5">
-    <PrevButton inputHref={generatePrevUrl()} />
-    <NextButton inputHref={generateNextUrl()} />
+    <!-- <PrevButton inputHref={generatePrevUrl()} /> -->
+    <!-- <NextButton class="nextButton" /> -->
+    <!-- <button class="prevPage">prev</button>
+    <button class="nextPage">next</button> -->
   </div>
 </Layout>
+
+<!-- <script>
+  var currentPage = 1;
+
+  const nextButton = document.querySelectorAll("button.nextPage");
+  const prevButton = document.querySelectorAll("button.prevPage");
+
+  nextButton.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentPage++;
+      alert("test" + currentPage);
+    });
+  });
+
+  prevButton.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        alert("test" + currentPage);
+      }
+    });
+  });
+</script> -->

@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPostsArray } from "../scripts/getPostsArray.js";
+import { getPostsArray } from "../scripts/scripts.js";
 
 export async function getStaticPaths() {
   var posts = await getPostsArray("http://whellworks.local/");
