@@ -1,9 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getPostsArray } from "../scripts/scripts.js";
+const apiUrl = 'http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/';
+
+// const apiUrl = import.meta.env.WORDPRESS_REST_API_URL;
 
 export async function getStaticPaths() {
-  var posts = await getPostsArray("http://whellworks.local/");
+  var posts = await getPostsArray('http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/');
 
 
   return posts.map(({ slug, photoUrl, title, content }) => {
