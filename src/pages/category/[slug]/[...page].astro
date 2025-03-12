@@ -3,6 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import Article from "../../../components/Article.astro";
 import SearchBar from "../../../components/SearchBar.astro";
 import Pagination from "../../../components/Pagination.astro";
+import Footer from "../../../components/Footer.astro";
 
 // Define static paths for categories with pagination
 export async function getStaticPaths() {
@@ -82,8 +83,8 @@ const url = {
 ---
 
 <Layout>
-  <SearchBar />
-  <div class="container mx-auto">
+  <div class="container mx-auto w-screen">
+    <SearchBar/>
     <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
       <!-- Main Content Area -->
 
@@ -115,13 +116,5 @@ const url = {
         <Pagination currentPage={currentPage} lastPage={totalPages} url={url} />
       )
     }
-
-    <div class="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-      {
-        totalPosts > 0
-          ? `Showing posts ${offset + 1}-${Math.min(offset + postsPerPage, totalPosts)} of ${totalPosts} in ${category.name}`
-          : `0 posts in ${category.name}`
-      }
-    </div>
   </div>
 </Layout>

@@ -42,40 +42,31 @@ const posts = await response.json();
 // Create pagination URLs for the component
 const url = {
   prev:
-    currentPage > 1
-      ? currentPage === 2
-        ? "/"
-        : `/${currentPage - 1}`
-      : null,
+    currentPage > 1 ? (currentPage === 2 ? "/" : `/${currentPage - 1}`) : null,
   next: currentPage < totalPages ? `/${currentPage + 1}` : null,
   current: currentPage === 1 ? "/" : `/${currentPage}`,
 };
 ---
 
-<Layout title={`Blog - Page ${currentPage}`}>
-  <SearchBar/>
+<Layout>
+  <SearchBar />
   <div class="container mx-auto">
     <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
       {
         posts.map((post) => (
-        <Article
-              title={post.title.rendered}
-              content={post.content.rendered}
-              slug={post.slug}
-              date={new Date(post.date).toLocaleDateString()}
-              photoUrl={
-                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null
-              }
-            />
+          <Article
+            title={post.title.rendered}
+            content={post.content.rendered}
+            slug={post.slug}
+            date={new Date(post.date).toLocaleDateString()}
+            photoUrl={
+              post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null
+            }
+          />
         ))
       }
     </div>
 
     <Pagination currentPage={currentPage} lastPage={totalPages} url={url} />
-
-    <div class="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-      Showing posts {offset + 1}-{Math.min(offset + postsPerPage, totalPosts)} of
-      {totalPosts}
-    </div>
   </div>
 </Layout>
