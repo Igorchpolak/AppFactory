@@ -50,21 +50,23 @@ const url = {
 
 <Layout>
   <SearchBar />
-  <div class="container mx-auto">
-    <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
-      {
-        posts.map((post) => (
-          <Article
-            title={post.title.rendered}
-            content={post.content.rendered}
-            slug={post.slug}
-            date={new Date(post.date).toLocaleDateString()}
-            photoUrl={
-              post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null
-            }
-          />
-        ))
-      }
+  <div class="container mx-auto 2xl:mx-0 w-[calc(100vw-1.2rem)]">
+    <div class=" min-h-[calc(100vh-20.5rem)] 2xl:w-[calc(100vw-1.2rem)]">
+      <div class="mx-auto 2xl:mx-0  my-10 w-full flex justify-center flex-wrap gap-10">
+        {
+          posts.map((post) => (
+            <Article
+              title={post.title.rendered}
+              content={post.content.rendered}
+              slug={post.slug}
+              date={new Date(post.date).toLocaleDateString()}
+              photoUrl={
+                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null
+              }
+            />
+          ))
+        }
+      </div>
     </div>
 
     <Pagination currentPage={currentPage} lastPage={totalPages} url={url} />

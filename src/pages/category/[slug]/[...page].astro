@@ -83,13 +83,11 @@ const url = {
 ---
 
 <Layout>
-  <div class="container mx-auto w-screen">
-    <SearchBar/>
-    <div class="mx-auto my-10 w-full flex justify-center flex-wrap gap-10">
-      <!-- Main Content Area -->
-
-      {
-        posts.length > 0 ? (
+  <SearchBar />
+  <div class="container mx-auto 2xl:mx-0 w-[calc(100vw-1.2rem)]">
+    <div class=" min-h-[calc(100vh-20.5rem)] 2xl:w-[calc(100vw-1.2rem)]">
+      <div class="mx-auto 2xl:mx-0  my-10 w-full flex justify-center flex-wrap gap-10">
+        {
           posts.map((post) => (
             <Article
               title={post.title.rendered}
@@ -101,20 +99,10 @@ const url = {
               }
             />
           ))
-        ) : (
-          <div class="col-span-full text-center py-12">
-            <p class="text-xl text-gray-700 dark:text-gray-300">
-              No posts found in this category.
-            </p>
-          </div>
-        )
-      }
+        }
+      </div>
     </div>
 
-    {
-      totalPosts > postsPerPage && (
-        <Pagination currentPage={currentPage} lastPage={totalPages} url={url} />
-      )
-    }
+    <Pagination currentPage={currentPage} lastPage={totalPages} url={url} />
   </div>
 </Layout>

@@ -2,7 +2,7 @@
 import Search from "astro-pagefind/components/Search";
 ---
 
-<div class="container mx-auto px-4 h-36 w-[80%]">
+<div class="container mx-auto px-4 h-26 w-[80%] ">
   <div class="searchContainer">
     <Search
       id="search"
@@ -12,21 +12,17 @@ import Search from "astro-pagefind/components/Search";
   </div>
 </div>
 
-<style>
-  /* .container {
-    height: 8.5rem;
-    width: 100%;
-  } */
+<style is:global>
+
   
   .searchContainer {
     z-index: 10;
     position: absolute;
-    top: 4rem;
+    top: 2.5rem;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    /* max-width: 60rem; */
-     /* Responsive width, similar to Tailwind's container */
+
   }
 
   /* Tailwind-inspired search bar styling */
@@ -34,11 +30,14 @@ import Search from "astro-pagefind/components/Search";
     --pagefind-ui-scale: 1;
     --pagefind-ui-primary: #4f46e5; /* indigo-600 */
     --pagefind-ui-text: #111827; /* gray-900 */
-    --pagefind-ui-background: #ffffff; /* white */
+    --pagefind-ui-background: #ffffff; white
+    --pagefind-ui-popup-background: #ffffff;
     --pagefind-ui-border: #e5e7eb; /* gray-200 */
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 0.5rem; /* rounded-lg */
     --pagefind-ui-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    /* background-color: red; */
+    height: 3rem;
     width: 100%;
   }
 
@@ -81,8 +80,9 @@ import Search from "astro-pagefind/components/Search";
   }
 
   .pagefind-ui .pagefind-ui__drawer {
+    color: red;
     padding: 1rem;
-    background-color: white;
+    background-color: white !important;
     border: 1px solid #e5e7eb; /* gray-200 */
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */

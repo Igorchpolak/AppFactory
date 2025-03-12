@@ -19,12 +19,15 @@ import AstroNavBar from "../components/AstroNavBar.astro";
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
-  <body class="bg-gray-100 w-full flex flex-col">
-    <AstroNavBar/>
-    <!-- <Header /> -->
+  <body class="bg-gray-100 w-full flex flex-col min-h-screen">
+    <!-- <AstroNavBar/> -->
+    <Header />
     <!-- <SearchBar/> -->
     <div>
-      <slot />
+      <div class="">
+        <!-- min-h-[91vh] -->
+        <slot />
+      </div>
     </div>
     <Footer />
   </body>
