@@ -1,5 +1,7 @@
 ---
 import {getCategoriesArray} from '../scripts/scripts'
+import {WORDPRESS_REST_API_URL} from  'astro:env/client';
+
 
 
 type propertys = {
@@ -8,7 +10,7 @@ type propertys = {
   id: number;
 };
 
-var categories = await getCategoriesArray('http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/');
+var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
 ---
 
 <nav

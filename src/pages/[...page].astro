@@ -3,14 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import Article from "../components/Article.astro";
 import Pagination from "../components/Pagination.astro";
 import SearchBar from "../components/SearchBar.astro";
-// const apiUrl:string = "http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/"
-// const apiUrl = import.meta.env.WORDPRESS_REST_API_URL;
+import {WORDPRESS_REST_API_URL, POSTS_PER_PAGE} from  'astro:env/client';
 
 export async function getStaticPaths() {
   // First, get the total count of posts to calculate pagination
-  const countResponse = await fetch(`http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/wp-json/wp/v2/posts?per_page=1`);
+  const countResponse = await fetch(`${WORDPRESS_REST_API_URL}wp-json/wp/v2/posts?per_page=1`);
   const totalPosts = parseInt(countResponse.headers.get("X-WP-Total") || "0");
-  const postsPerPage = 6; // Set to display 5 posts per page
+  const postsPerPage = POSTS_PER_PAGE; // Set to display 5 posts per page
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
   // Generate page routes, but don't fetch content yet
@@ -35,7 +34,7 @@ const { currentPage, totalPages, totalPosts, postsPerPage } = Astro.props;
 // Now fetch only the posts needed for this specific page
 const offset = (currentPage - 1) * postsPerPage;
 const response = await fetch(
-  `http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/wp-json/wp/v2/posts?_embed&per_page=${postsPerPage}&offset=${offset}`
+  `${WORDPRESS_REST_API_URL}wp-json/wp/v2/posts?_embed&per_page=${postsPerPage}&offset=${offset}`
 );
 const posts = await response.json();
 

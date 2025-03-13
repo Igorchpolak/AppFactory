@@ -1,8 +1,7 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import pagefind from "astro-pagefind";
-import netlify from '@astrojs/netlify/functions';
-
+import netlify from "@astrojs/netlify/functions";
 
 export default defineConfig({
   vite: {
@@ -12,7 +11,20 @@ export default defineConfig({
     format: "file",
   },
   integrations: [pagefind()],
+  env: {
+    schema: {
+      WORDPRESS_REST_API_URL: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+      POSTS_PER_PAGE: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+    },
+  },
   // output: "server",
   // adapter: netlify(),
-
 });
