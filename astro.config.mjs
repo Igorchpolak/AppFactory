@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import pagefind from "astro-pagefind";
+import netlify from '@astrojs/netlify/functions';
+
 
 export default defineConfig({
   vite: {
@@ -10,4 +12,7 @@ export default defineConfig({
     format: "file",
   },
   integrations: [pagefind()],
+  // output: "server",
+  // adapter: netlify(),
+
 });

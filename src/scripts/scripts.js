@@ -106,14 +106,3 @@ function getImageUrlById(id, wpMediaJson) {
   
     return result;
   }
-  
-  // const media = await fetch(`http://whellworks.local/wp-json/wp/v2/media`);
-  // const mediaJson = await media.json();
-  
-  // console.log(getImageUrlById(14,mediaJson));
-  
-  // console.log(await getPostsArray('http://whellworks.local'));
-  
-  // makePageNumbersArray("http://whellworks.local");
-  
-  console.log(await getCategoriesArray("http://whellworks.local"));
