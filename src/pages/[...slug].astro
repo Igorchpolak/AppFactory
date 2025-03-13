@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import { getPostsArray } from "../scripts/scripts.js";
 import {WORDPRESS_REST_API_URL} from  'astro:env/client';
 
-
 export async function getStaticPaths() {
   var posts = await getPostsArray(WORDPRESS_REST_API_URL);
 
@@ -22,21 +21,25 @@ const { photoUrl, title, content } = Astro.props;
 
 <Layout>
   <div class="w-full flex justify-center items-center flex-col">
-    <img class="aspect-3/2 object-cover w-250 m-10 rounded-3xl shadow-2xl" src={photoUrl}>
-    <div class="w-250 slug">
-      <h1 class="mb-3 text-4xl font-bold tracking-tight text-black">{title}</h1>
+    <img class="aspect-3/2 object-cover w-[90%] max-w-250 m-10 rounded-3xl shadow-2xl" src={photoUrl}>
+    <div style="" class="slug max-w-250 w-[90%]">
+      <h1 class="mb-8 text-4xl font-bold tracking-tight text-black">{title}</h1>
       <p class="mb-2 " set:html={content}></p>
     </div>
   </div>
 </Layout>
 
-<style>
+<style is:global>
   .slug{
     font-size:1.2rem;
   }
 
   .slug h3{
-    color: red;
+    font-size: 1.4em;
+  }
+
+  .slug h2{
+    font-size: 1.2em;
   }
 </style>
 

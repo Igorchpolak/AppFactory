@@ -29,6 +29,8 @@ export default defineConfig({
       }),
     },
   },
-
+  image: {
+    domains: ["igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link"],
+  },
   adapter: netlify(),
 });

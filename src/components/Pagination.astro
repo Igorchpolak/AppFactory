@@ -46,7 +46,7 @@ for (let i = startPage; i <= endPage; i++) {
       <>
         <li>
           <a 
-            href={`/blog`} 
+            href={`/`} 
             class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
           >
             1
@@ -64,7 +64,7 @@ for (let i = startPage; i <= endPage; i++) {
     {pageNumbers.map(num => (
       <li>
         <a 
-          href={num === 1 ? `/blog` : `/blog/${num}`} 
+          href={num === 1 ? `/` : `/${num}`} 
           class={`px-3 py-2 rounded-lg ${num === currentPage 
             ? 'bg-blue-700 text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700' 
             : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200'}`}
@@ -85,7 +85,7 @@ for (let i = startPage; i <= endPage; i++) {
         )}
         <li>
           <a 
-            href={`/blog/${lastPage}`} 
+            href={`/${lastPage}`} 
             class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
           >
             {lastPage}
