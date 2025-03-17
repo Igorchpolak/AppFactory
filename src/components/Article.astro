@@ -14,32 +14,27 @@ function shortText(inputText: string, maxLength: number) {
 ---
 
 <div
-  class="w-100 max-sm:w-[80%] max-md:w-110 max-lg:w-82   bg-white  border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+  class="w-100 max-sm:w-[80%] max-md:w-110 max-lg:w-82 bg-[#416745] text-[#e6e5d8]  border-gray-200 rounded-lg shadow-xl"
 >
   <a href="#">
-    <Image class="aspect-3/2 object-cover ... rounded-t-lg w-full" src={photoUrl} alt={title}
+    <Image class=" aspect-3/2 object-cover ... rounded-t-lg w-full" src={photoUrl} alt={title}
     width="400" height="225"/>
-    <!-- <img
-      class="aspect-3/2 object-cover ... rounded-t-lg w-full"
-      src={photoUrl}
-      alt=""
-    /> -->
   </a>
   <div class="p-5">
     <a href="#">
       <h5
-        class="h-16 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white shortText"
+        class="h-16 mb-2 text-2xl font-normal font-[bungee] tracking-normal shortText"
       >
         {title}
       </h5>
     </a>
     <p
-      class="mb-3 font-normal text-gray-700 dark:text-gray-400 shortText"
+      class="mb-3 font-normal text-[#dadace] shortText"
       set:html={content.replace(/<[^>]*>/g, "")}
     />
     <a
       href={`/${slug}/`}
-      class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      class="inline-flex items-center font-[bungee] px-3 py-2 text-sm font-extralight text-center text-[#f1f1e3] rounded-lg bg-[#2b422fb7]  "
     >
       Read more
       <svg

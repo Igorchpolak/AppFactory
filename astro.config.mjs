@@ -4,6 +4,8 @@ import pagefind from "astro-pagefind";
 
 import netlify from "@astrojs/netlify";
 
+import sitemap from "@astrojs/sitemap";
+
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
@@ -13,7 +15,7 @@ export default defineConfig({
     format: "file",
   },
 
-  integrations: [pagefind()],
+  integrations: [pagefind(), sitemap()],
 
   env: {
     schema: {

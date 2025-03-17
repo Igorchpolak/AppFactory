@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
+@import "@fontsource/roboto";
+@import '@fontsource/rammetto-one';
+
 
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
@@ -10,4 +13,9 @@
 
 .hidden {
     display: none;
+  }
+
+  @theme{
+    --font-sans: 'roboto','sans-serif';
+    --font-mono: 'rammetto-one', 'SFMono-Regular';
   }
