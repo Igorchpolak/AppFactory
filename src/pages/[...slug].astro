@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import {
   getPostsArray,
@@ -30,31 +31,43 @@ const { photoUrl, title, content, relatedPosts } = Astro.props;
 
 <Layout>
   <div
-    class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-4xl flex-col my-8 bg-[#416745] shadow-2xl text-[#e6e5d8] p-10"
+    class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-4xl flex-col my-8 bg-[#416745] shadow-2xl text-[#e6e5d8] px-10 pt-10 pb-5 max-sm:px-7.5 max-sm:pt-7.5 max-sm:pb-2.5"
   >
-    <img
-      class="aspect-3/2 object-cover w-[100%] rounded-3xl shadow-2xl"
+    <Image
+      class="aspect-3/2 object-cover ... rounded-lg w-full"
       src={photoUrl}
+      alt={title}
+      width="2000"
+      height="1125"
     />
+
     <div style="" class="slug max-w-250 w-[95%] my-5">
-      <h1 class="my-8 text-4xl font-bold tracking-tight font-[bungee]">
+      <h1
+        class="my-8 text-4xl max-sm:text-3xl font-semibold tracking-wide font-[bungee] max-w-full break-words"
+      >
         {title}
       </h1>
-      <p set:html={content} /></p>
+      <p set:html={content} />
     </div>
   </div>
   <div
-    class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-3xl flex-col my-8  text-[#416745]"
+    class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-3xl flex-col my-8 text-[#416745]"
   >
     <div class="max-w-270 w-[100%] flex flex-col items-center">
-      <h1 class="my-8 text-4xl gap-20 font-normal font-[bungee]">
+      <h1 class="my-8 text-4xl max-sm:text-3xl gap-20 font-normal font-[bungee]">
         Related posts
       </h1>
       <div class="w-[100%] flex gap-10 flex-wrap justify-center items-center">
         {
           relatedPosts.map((post) => {
-            return <Article photoUrl={post.photoUrl} title={post.title} content={post.content} slug={post.slug}
-            />;
+            return (
+              <Article
+                photoUrl={post.photoUrl}
+                title={post.title}
+                content={post.content}
+                slug={post.slug}
+              />
+            );
           })
         }
       </div>
@@ -72,9 +85,25 @@ const { photoUrl, title, content, relatedPosts } = Astro.props;
     margin-top: 2rem;
     font-size: 1.5em;
     margin-bottom: 0.4rem;
+    letter-spacing: 0.15rem;
   }
 
   .slug h2 {
     font-size: 1.2em;
+  }
+
+  .slug strong{
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+  }
+
+  @media (width < 40rem) {
+    .slug {
+      font-size: 1rem;
+    }
+
+    .slug h3 {
+      font-size: 1.3rem;
+    }
   }
 </style>

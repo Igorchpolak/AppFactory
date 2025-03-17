@@ -22,30 +22,30 @@ var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
   >
     <a
       href="/"
-      class="flex items-center justify-center h-13 w-80 space-x-3 rtl:space-x-reverse"
+      class="flex items-center justify-center h-13 ml-10 max-sm:ml-2.5 space-x-3 rtl:space-x-reverse"
     >
       <h1
-        class="title text-[#e6e5d8] font-[bungee] 2xs items-end justify-center duration-200 self-center text-[1.7rem] over:text-[1.8rem] font-medium whitespace-nowrap"
+        class="title text-[#e6e5d8] font-[bungee] 2xs items-end justify-center duration-200 self-center text-[1.7rem] max-sm:text-[1.4rem]  font-medium whitespace-nowrap"
       >
         WheelWorks.com
       </h1>
     </a>
     <div class="flex md:order-1">
-      <ul class="flex gap-10">
+      <ul class="flex gap-10 max-sm:gap-0 max-sm:mr-1">
         <li>
           <a
             href="/"
-            class="text-[#e6e5d8] font-[bungee] md:block font-light text-[1.2rem] py-2 px-3 max-sm:hidden sm:hidden bg-transparent"
+            class="text-[#e6e5d8] font-[bungee] md:block font-light text-[1.2rem] py-2 px-3  max-sm:hidden sm:hidden bg-transparent"
             aria-current="page">Home</a
           >
         </li>
-        <li>
+        <li class="max-sm:mx-2 max-sm:my-2">
           <button
             id="dropdownNavbarLink"
             data-dropdown-toggle="dropdownNavbar"
             style="
       font-family: "
-            class="bg-[#416644] text-[#e6e5d8] font-[bungee] flex items-center justify-between w-full py-2 px-3 text-[1.2rem]"
+            class="bg-[#416644] text-[#e6e5d8] font-[bungee] flex items-center justify-between w-full py-2 max-sm:py-1.5 px-3 max-sm:px-2.25 text-[1.2rem] max-sm:text-[1rem] max-sm:bg-[#2b422fb7] max-sm:rounded-lg"
             >Categories <svg
               class="w-2.5 h-2.5 ms-2.5"
               aria-hidden="true"
@@ -64,7 +64,7 @@ var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
           <!-- Dropdown menu -->
           <div
             id="dropdownNavbar"
-            class="bg-[#416644] hidden font-medium divide-y divide-gray-100 rounded-lg shadow-sm w-44"
+            class=" bg-[#416644] hidden font-medium divide-y divide-gray-100 rounded-lg shadow-sm w-40"
           >
             <ul
               style="color: #e6e5d8;
