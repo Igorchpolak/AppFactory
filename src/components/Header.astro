@@ -1,8 +1,9 @@
 ---
-import {getCategoriesArray} from '../scripts/scripts'
-import {WORDPRESS_REST_API_URL} from  'astro:env/client';
+import { getCategoriesArray } from "../scripts/scripts";
+import { WORDPRESS_REST_API_URL } from "astro:env/client";
+import "@fontsource/bungee";
 
-
+// import '@fontsource/rammetto-one';
 
 type propertys = {
   category: string;
@@ -14,36 +15,37 @@ var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
 ---
 
 <nav
-  class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 "
+  class="bg-[#416644] shadow-2xs fixed w-full z-20 top-0 start-0"
 >
   <div
-    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3"
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto"
   >
     <a
       href="/"
-      class="flex items-center space-x-3 rtl:space-x-reverse ml-1 "
+      class="flex items-center justify-center h-13 ml-10 max-sm:ml-2.5 space-x-3 rtl:space-x-reverse"
     >
-      <span
-        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white "
-        >WheelWorks.com</span
+      <h1
+        class="title text-[#e6e5d8] font-[bungee] 2xs items-end justify-center duration-200 self-center text-[1.7rem] max-sm:text-[1.4rem]  font-medium whitespace-nowrap"
       >
+        WheelWorks.com
+      </h1>
     </a>
     <div class="flex md:order-1">
-      <ul
-        class="flex flex-row p-0 mt-0 mr-1 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-      >
+      <ul class="flex gap-10 max-sm:gap-0 max-sm:mr-1">
         <li>
           <a
             href="/"
-            class="md:block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500  max-sm:hidden sm:hidden"
+            class="text-[#e6e5d8] font-[bungee] md:block font-light text-[1.2rem] py-2 px-3  max-sm:hidden sm:hidden bg-transparent"
             aria-current="page">Home</a
           >
         </li>
-        <li>
+        <li class="max-sm:mx-2 max-sm:my-2">
           <button
             id="dropdownNavbarLink"
             data-dropdown-toggle="dropdownNavbar"
-            class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+            style="
+      font-family: "
+            class="bg-[#416644] text-[#e6e5d8] font-[bungee] flex items-center justify-between w-full py-2 max-sm:py-1.5 px-3 max-sm:px-2.25 text-[1.2rem] max-sm:text-[1rem] max-sm:bg-[#2b422fb7] max-sm:rounded-lg"
             >Categories <svg
               class="w-2.5 h-2.5 ms-2.5"
               aria-hidden="true"
@@ -62,16 +64,23 @@ var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
           <!-- Dropdown menu -->
           <div
             id="dropdownNavbar"
-            class=" hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600"
+            class=" bg-[#416644] hidden font-medium divide-y divide-gray-100 rounded-lg shadow-sm w-40"
           >
             <ul
-              class="z-100 py-2 text-sm text-gray-700 dark:text-gray-400"
+              style="color: #e6e5d8;
+      font-family: 'bungee', system-ui"
+              class="z-100 py-2 text-sm "
               aria-labelledby="dropdownLargeButton"
             >
               {
-                categories.map((item : propertys) => (
+                categories.map((item: propertys) => (
                   <li class="z-100">
-                    <a href={`/category/${item.category}/`}class=" block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{item.name}</a>
+                    <a
+                      href={`/category/${item.category}/`}
+                      class=" block px-4 py-2 "
+                    >
+                      {item.name}
+                    </a>
                   </li>
                 ))
               }

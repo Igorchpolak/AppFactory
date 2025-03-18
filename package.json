@@ -10,11 +10,17 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^6.2.3",
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource/bungee": "^5.2.5",
+    "@fontsource/rammetto-one": "^5.2.5",
+    "@fontsource/roboto": "^5.2.5",
     "@tailwindcss/vite": "^4.0.10",
     "astro": "^5.4.1",
     "astro-navbar": "^2.3.9",
     "astro-pagefind": "^1.8.1",
     "flowbite": "^3.1.2",
+    "main": "file:",
+    "node-fetch": "^3.3.2",
     "tailwindcss": "^4.0.10"
   }
 }

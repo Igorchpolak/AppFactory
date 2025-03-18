@@ -1,0 +1,123 @@
+---
+const { inputPostId } = Astro.props;
+const WORDPRESS_REST_API_URL = import.meta.env.WORDPRESS_REST_API_URL;
+
+// Fetch comments for this post
+const response = await fetch(
+  `${WORDPRESS_REST_API_URL}/wp-json/wp/v2/comments?post=${inputPostId}&orderby=date&order=asc`
+);
+const comments = await response.json();
+
+// Check if comments is an array, otherwise use an empty array
+const commentsList = Array.isArray(comments) ? comments : [];
+---
+
+<div
+  class="comments-section w-[95%] mx-auto max-w-270 flex flex-row rounded-4xl justify-between my-8 bg-[#416745] shadow-2xl text-[#e6e5d8] p-10"
+>
+  <div class="w-[calc(100%-19rem)]">
+    <h1 class="text-3xl font-[bungee] mb-5">Comments ({commentsList.length})</h1>
+    {
+      commentsList.map((comment) => (
+        <div class="comment w-full mb-5 ml-2">
+          <div class="comment-meta">
+            <span class="author text-xl font-[bungee]">
+              {comment.author_name}
+            </span>
+            <span class="date">
+              {new Date(comment.date).toLocaleDateString()}
+            </span>
+          </div>
+          <div class="comment-content" set:html={comment.content.rendered} />
+          <div class="w-full h-[0.13rem] bg-[#f1f1e3] "></div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="comment-form  w-60">
+    <h4 class="text-[1.5rem] font-[bungee]">Leave a comment</h4>
+    <form id="comment-form">
+      <input type="hidden" name="post" value={inputPostId} />
+      <div class="form-group ml-2 mt-2">
+        <label for="author" class="font-[bungee]">Username</label>
+        <input type="text" class="rounded-lg m-1 w-50 text-gray-600" id="author" name="author_name" required />
+      </div>
+      <div class="form-group ml-2">
+        <label for="email" class="font-[bungee]">Email</label>
+        <input type="email" class="rounded-lg m-1 w-50 text-gray-600" id="email" name="author_email" required />
+      </div>
+      <div class="form-group ml-2">
+        <label for="content" class="font-[bungee]">Comment</label>
+        <textarea id="content" class="rounded-lg m-1 w-50 text-gray-600" name="content" value="Comment" required></textarea>
+      </div>
+      <div class="w-full flex justify-center">
+        <button
+        type="submit"
+        class="inline-flex items-center font-[bungee] px-3 py-2 text-sm font-extralight text-center text-[#f1f1e3]  rounded-lg bg-[#2b422fb7]"
+        >Submit Comment</button
+      >
+      </div>
+      
+    </form>
+    <div id="comment-status" class="hidden"></div>
+  </div>
+</div>
+
+<script define:vars={{ inputPostId, WORDPRESS_REST_API_URL }}>
+  document
+    .getElementById("comment-form")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const statusElement = document.getElementById("comment-status");
+      statusElement.textContent = "Submitting comment...";
+      statusElement.className = "comment-status submitting";
+
+      const formData = new FormData(e.target);
+      const commentData = {
+        post: inputPostId,
+        author_name: formData.get("author_name"),
+        author_email: formData.get("author_email"),
+        author_url: formData.get("author_url") || "",
+        content: formData.get("content"),
+      };
+
+      try {
+        const response = await fetch(
+          `${WORDPRESS_REST_API_URL}/wp-json/wp/v2/comments`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(commentData),
+          }
+        );
+
+        if (response.ok) {
+          // Show success message
+          statusElement.textContent =
+            "Comment submitted successfully! Refreshing...";
+          statusElement.className = "comment-status success";
+
+          // Clear the form
+          document.getElementById("comment-form").reset();
+
+          // Refresh page after brief delay
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+        } else {
+          const errorData = await response.json();
+          statusElement.textContent = `Failed: ${errorData.message || "Please try again."}`;
+          statusElement.className = "comment-status error";
+        }
+      } catch (error) {
+        console.error("Error posting comment:", error);
+        statusElement.textContent =
+          "Error connecting to server. Please try again.";
+        statusElement.className = "comment-status error";
+      }
+    });
+</script>

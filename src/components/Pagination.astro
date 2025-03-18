@@ -29,13 +29,13 @@ for (let i = startPage; i <= endPage; i++) {
       {prevUrl ? (
         <a 
           href={prevUrl} 
-          class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+          class="px-3 py-2 rounded-lg bg-[#416644] hover:bg-[#416644ec] text-gray-700 dark:text-gray-200"
           aria-label="Go to previous page"
         >
           &laquo;
         </a>
       ) : (
-        <span class="px-3 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600">
+        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#335037] text-[#e2e1d3]">
           &laquo;
         </span>
       )}
@@ -66,8 +66,8 @@ for (let i = startPage; i <= endPage; i++) {
         <a 
           href={num === 1 ? `/` : `/${num}`} 
           class={`px-3 py-2 rounded-lg ${num === currentPage 
-            ? 'bg-blue-700 text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700' 
-            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200'}`}
+            ? 'text-[#e6e5d8] bg-[#5a8a5e] hover:bg-[#416644ec] font-[bungee]' 
+            : 'bg-[#416644] hover:bg-[#416644ec] text-[#e6e5d8] font-[bungee]'}`}
           aria-current={num === currentPage ? 'page' : undefined}
         >
           {num}
@@ -99,13 +99,13 @@ for (let i = startPage; i <= endPage; i++) {
       {nextUrl ? (
         <a 
           href={nextUrl} 
-          class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+          class="px-3 py-2 rounded-lg bg-[#416644] hover:bg-[#416644ec] text-[#e2e1d3]"
           aria-label="Go to next page"
         >
           &raquo;
         </a>
       ) : (
-        <span class="px-3 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600">
+        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#335037] text-[#e2e1d3]">
           &raquo;
         </span>
       )}
