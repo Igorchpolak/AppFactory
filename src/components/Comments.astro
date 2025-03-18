@@ -12,7 +12,7 @@ const comments = await response.json();
 const commentsList = Array.isArray(comments) ? comments : [];
 ---
 
-<div
+<div data-pagefind-ignore
   class="comments-section w-[95%] mx-auto max-w-270 flex flex-row rounded-4xl justify-between my-8 bg-[#416745] shadow-2xl text-[#e6e5d8] p-10"
 >
   <div class="w-[calc(100%-19rem)]">

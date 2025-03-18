@@ -4,7 +4,7 @@ function getImageUrlById(id, wpMediaJson) {
       return true;
     }
   });
-  return result ? result.source_url : null;
+  return result ? result.source_url : "https://placehold.co/600x400";
 }
 
 export async function getPostsArray(Wordpresslink) {

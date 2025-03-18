@@ -14,8 +14,20 @@ export default defineConfig({
   build: {
     format: "file",
   },
-  site: 'https://elaborate-druid-5f07f6.netlify.app',
-  integrations: [pagefind(), sitemap()],
+  site: "https://elaborate-druid-5f07f6.netlify.app",
+  integrations: [
+    pagefind({
+      indexerOptions: {
+        // Tell Pagefind to be more verbose for debugging
+        verbose: true,
+        // Exclude problematic elements if needed
+        excludeSelectors: ["nav", "footer", ".navigation", ".sidebar"],
+        // Force Pagefind to treat your content as static HTML
+        forceLanguage: "en",
+      },
+    }),
+    sitemap(),
+  ],
 
   env: {
     schema: {

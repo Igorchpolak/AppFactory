@@ -34,8 +34,8 @@ const {postId, photoUrl, title, content, relatedPosts } = Astro.props;
 ---
 
 
-<Layout metaDescription={title}>
-  <article
+<Layout metaDescription={title} >
+  <article data-pagefind-body
     class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-4xl flex-col my-8 bg-[#416745] shadow-2xl text-[#e6e5d8] px-10 pt-10 pb-5 max-sm:px-7.5 max-sm:pt-7.5 max-sm:pb-2.5"
   >
     <Image
@@ -48,7 +48,7 @@ const {postId, photoUrl, title, content, relatedPosts } = Astro.props;
     />
 
     <div style="" class="slug max-w-250 w-[95%] my-5">
-      <h1
+      <h1 data-pagefind-meta={title}
         class="my-8 text-4xl max-sm:text-3xl font-semibold tracking-wide font-[bungee] max-w-full break-words"
       >
         {title}
@@ -58,7 +58,7 @@ const {postId, photoUrl, title, content, relatedPosts } = Astro.props;
   </article>
   <Comments inputPostId={postId} />
 
-  <div
+  <div data-pagefind-ignore
     class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-3xl flex-col my-8 text-[#416745]"
   >
     <div class="max-w-270 w-[100%] flex flex-col items-center">
