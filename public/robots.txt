@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elaborate-druid-5f07f6.netlify.app/sitemap-index.xml

@@ -73,12 +73,20 @@ export async function makePageNumbersArray(
 export async function getPostsArrayFromCategory(
   categoryId,
   Wordpresslink,
-  quantityOfPostsToReturn = 0
+  quantityOfPostsToReturn = 0,
+  idOfPostToSkip = 0
 ) {
-  if (quantityOfPostsToReturn) {
+  if (idOfPostToSkip && quantityOfPostsToReturn) {
+    var posts = await fetch(
+      `${Wordpresslink}/wp-json/wp/v2/posts?categories=${categoryId}&per_page=${quantityOfPostsToReturn}&exclude=${idOfPostToSkip}`
+    );
+  }
+  else if (quantityOfPostsToReturn) {
     var posts = await fetch(
       `${Wordpresslink}/wp-json/wp/v2/posts?categories=${categoryId}&per_page=${quantityOfPostsToReturn}`
     );
+  }else if (idOfPostToSkip) {
+    `${Wordpresslink}/wp-json/wp/v2/posts?categories=${categoryId}&exclude=${idOfPostToSkip}`;
   } else {
     var posts = await fetch(
       `${Wordpresslink}/wp-json/wp/v2/posts?categories=${categoryId}`
@@ -111,6 +119,7 @@ export async function getCategoriesArray(Wordpresslink) {
   const result = categoriesJson.map((neededCategoryData) => {
     return {
       category: neededCategoryData.slug,
+      description: neededCategoryData.description,
       count: neededCategoryData.count,
       name: neededCategoryData.name,
       id: neededCategoryData.id,
@@ -124,6 +133,9 @@ export async function getCategoriesArray(Wordpresslink) {
 //   await getPostsArrayFromCategory(
 //     1,
 //     "http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/",
-//     2
+//     2,
+//     33
 //   )
 // );
+
+// `http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/wp-json/wp/v2/posts?categories=1&per_page=3&exclude=33`;

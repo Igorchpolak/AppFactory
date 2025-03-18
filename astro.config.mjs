@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     format: "file",
   },
-
+  site: 'https://elaborate-druid-5f07f6.netlify.app',
   integrations: [pagefind(), sitemap()],
 
   env: {
