@@ -1,25 +1,41 @@
-function getImageUrlById(id, wpMediaJson) {
-  const result = wpMediaJson.find((inputMedia) => {
-    if (id === inputMedia.post) {
-      return true;
+export async function getImageUrlById(id, Wordpresslink) {
+  const response = await fetch(
+    `${Wordpresslink}/wp-json/wp/v2/posts/${id}?_embed`
+  );
+  const postJson = await response.json();
+  const featuredmedia = postJson._embedded?.["wp:featuredmedia"]?.[0];
+  return featuredmedia.source_url;
+}
+
+export async function getAllPostsIds(Wordpresslink) {
+  var result = [];
+  var count = 0;
+
+  while (true) {
+    count++;
+    var post = await fetch(
+      `${Wordpresslink}/wp-json/wp/v2/posts?per_page=1&page=${count}`
+    );
+    if (post.ok) {
+      var postJson = await post.json();
+      result.push(postJson[0].id);
+    } else {
+      break;
     }
-  });
-  return result ? result.source_url : "https://placehold.co/600x400";
+  }
+  return result;
 }
 
 export async function getPostsArray(Wordpresslink) {
   const posts = await fetch(`${Wordpresslink}/wp-json/wp/v2/posts`);
   const postsJson = await posts.json();
 
-  const media = await fetch(`${Wordpresslink}/wp-json/wp/v2/media`);
-  const mediaJson = await media.json();
-
   const result = postsJson.map((neededPostData) => {
     return {
       postId: neededPostData.id,
       slug: neededPostData.slug,
       categories: neededPostData.categories,
-      photoUrl: getImageUrlById(neededPostData.id, mediaJson),
+      photoUrl: getImageUrlById(neededPostData.id, Wordpresslink),
       title: neededPostData.title.rendered,
       content: neededPostData.content.rendered,
     };
@@ -34,15 +50,12 @@ export async function getPagePostsArray(perPage, pageNumber, Wordpresslink) {
   );
   const postsJson = await posts.json();
 
-  const media = await fetch(`${Wordpresslink}/wp-json/wp/v2/media`);
-  const mediaJson = await media.json();
-
   const result = postsJson.map((neededPostData) => {
     return {
       postId: neededPostData.id,
       slug: neededPostData.slug,
       categories: neededPostData.categories,
-      photoUrl: getImageUrlById(neededPostData.id, mediaJson),
+      photoUrl: getImageUrlById(neededPostData.id, Wordpresslink),
       title: neededPostData.title.rendered,
       content: neededPostData.content.rendered,
     };
@@ -80,12 +93,11 @@ export async function getPostsArrayFromCategory(
     var posts = await fetch(
       `${Wordpresslink}/wp-json/wp/v2/posts?categories=${categoryId}&per_page=${quantityOfPostsToReturn}&exclude=${idOfPostToSkip}`
     );
-  }
-  else if (quantityOfPostsToReturn) {
+  } else if (quantityOfPostsToReturn) {
     var posts = await fetch(
       `${Wordpresslink}/wp-json/wp/v2/posts?categories=${categoryId}&per_page=${quantityOfPostsToReturn}`
     );
-  }else if (idOfPostToSkip) {
+  } else if (idOfPostToSkip) {
     `${Wordpresslink}/wp-json/wp/v2/posts?categories=${categoryId}&exclude=${idOfPostToSkip}`;
   } else {
     var posts = await fetch(
@@ -95,15 +107,12 @@ export async function getPostsArrayFromCategory(
 
   const postsJson = await posts.json();
 
-  const media = await fetch(`${Wordpresslink}/wp-json/wp/v2/media`);
-  const mediaJson = await media.json();
-
   const result = postsJson.map((neededPostData) => {
     return {
       postId: neededPostData.id,
       slug: neededPostData.slug,
       categories: neededPostData.categories,
-      photoUrl: getImageUrlById(neededPostData.id, mediaJson),
+      photoUrl: getImageUrlById(neededPostData.id, Wordpresslink),
       title: neededPostData.title.rendered,
       content: neededPostData.content.rendered,
     };
@@ -129,13 +138,45 @@ export async function getCategoriesArray(Wordpresslink) {
   return result;
 }
 
-// console.log(
-//   await getPostsArrayFromCategory(
-//     1,
-//     "http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/",
-//     2,
-//     33
-//   )
+//----------------------------------------------------------------------------
+
+// async function getStaticPaths(WORDPRESS_REST_API_URL) {
+//   var postsIds = await getAllPostsIds(WORDPRESS_REST_API_URL);
+
+//   return Promise.all(
+//     postsIds.map(async (id) => {
+//       const response = await fetch(
+//         `${WORDPRESS_REST_API_URL}wp-json/wp/v2/posts/${id}`
+//       );
+//       const postJson = await response.json();
+//       const post = {
+//         // postId: postJson.id,
+//         // slug: postJson.slug,
+//         categories: postJson.categories,
+//         title: postJson.title.rendered,
+//         content: postJson.content.rendered,
+//       };
+
+//       const slug = postJson.slug;
+//       const relatedPosts = await getPostsArrayFromCategory(
+//         postJson.categories,
+//         WORDPRESS_REST_API_URL,
+//         2,
+//         id
+//       );
+
+//       return {
+//         params: { slug },
+//         props: { id, post, relatedPosts },
+//       };
+//     })
+//   );
+// }
+
+// const paths = await getStaticPaths(
+//   "http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/"
 // );
+
+// console.log(paths[0]);
 
 // `http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/wp-json/wp/v2/posts?categories=1&per_page=3&exclude=33`;
