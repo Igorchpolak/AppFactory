@@ -79,13 +79,12 @@ const commentsList = Array.isArray(comments) ? comments : [];
         post: inputPostId,
         author_name: formData.get("author_name"),
         author_email: formData.get("author_email"),
-        author_url: formData.get("author_url") || "",
         content: formData.get("content"),
       };
 
       try {
         const response = await fetch(
-          `${WORDPRESS_REST_API_URL}/wp-json/wp/v2/comments`,
+          `${WORDPRESS_REST_API_URL}wp-json/wp/v2/comments`,
           {
             method: "POST",
             headers: {
