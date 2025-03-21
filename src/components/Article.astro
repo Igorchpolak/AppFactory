@@ -1,5 +1,9 @@
 ---
 import { Image } from "astro:assets";
+import '@fontsource/gugi';
+import '@fontsource/roboto';
+
+
 
 const {
   slug = "test",
@@ -15,7 +19,7 @@ function shortText(inputText: string, maxLength: number) {
 ---
 
 <article
-  class="w-100 max-sm:w-[80%] max-md:w-110 max-lg:w-82 bg-[#416745] text-[#e6e5d8] border-gray-200 rounded-lg shadow-xl"
+  class="w-100 max-sm:w-[80%] max-md:w-110 max-lg:w-82 bg-[#354eaf] text-[#fffffd] border-gray-200 rounded-lg shadow-xl"
 >
   <a href="#">
     <Image
@@ -30,7 +34,7 @@ function shortText(inputText: string, maxLength: number) {
   <div class="p-5">
     <a href="#">
       <h5
-        class="h-16 mb-2 text-2xl font-normal font-[bungee] tracking-normal shortText"
+        class="h-16 mb-2 text-2xl font-normal font-[roboto] tracking-normal shortText"
       >
         {title}
       </h5>
@@ -41,9 +45,9 @@ function shortText(inputText: string, maxLength: number) {
     />
     <a
       href={`/${slug}/`}
-      class="inline-flex items-center font-[bungee] px-3 py-2 text-sm font-extralight text-center text-[#f1f1e3] rounded-lg bg-[#2b422fb7]"
+      class="inline-flex items-center font-[roboto] px-3 py-2 text-sm font-semibold tracking-wide text-center text-[#f1f1e3] rounded-lg bg-[#576bc7e1] hover:bg-[#7684c28c] duration-100 ease-in "
     >
-      Read more
+      READ MORE
       <svg
         class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
         aria-hidden="true"

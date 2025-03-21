@@ -12,6 +12,7 @@
     "@astrojs/netlify": "^6.2.3",
     "@astrojs/sitemap": "^3.2.1",
     "@fontsource/bungee": "^5.2.5",
+    "@fontsource/gugi": "^5.2.5",
     "@fontsource/rammetto-one": "^5.2.5",
     "@fontsource/roboto": "^5.2.5",
     "@tailwindcss/vite": "^4.0.10",

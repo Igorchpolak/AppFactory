@@ -3,8 +3,8 @@ export async function getImageUrlById(id, Wordpresslink) {
     `${Wordpresslink}/wp-json/wp/v2/posts/${id}?_embed`
   );
   const postJson = await response.json();
-  const featuredmedia = postJson._embedded?.["wp:featuredmedia"]?.[0];
-  return featuredmedia.source_url;
+  const featuredmedia = postJson._embedded?.["wp:featuredmedia"]?.[0].source_url || "https://placehold.co/600x400";
+  return featuredmedia;
 }
 
 export async function getAllPostsIds(Wordpresslink) {

@@ -51,7 +51,7 @@ const url = {
 };
 ---
 
-<Layout metaDescription="Blog about mountains enduro bikes mechanics">
+<Layout metaDescription="Blog about mountains enduro bikes mechanics" title="WheelWorks">
   <SearchBar />
   <div class="container mx-auto 2xl:mx-0 w-[calc(100vw-1.2rem)]">
     <div class="min-h-[calc(100vh-20.5rem)] 2xl:w-[calc(100vw-1.2rem)]">
@@ -66,7 +66,7 @@ const url = {
               slug={post.slug}
               date={new Date(post.date).toLocaleDateString()}
               photoUrl={
-                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null
+                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://placehold.co/600x400"
               }
             />
           ))

@@ -1,14 +1,21 @@
-export async function getImageUrlById2(id, Wordpresslink) {
+async function sendPost() {
   const response = await fetch(
-    `${Wordpresslink}/wp-json/wp/v2/posts/${id}?_embed`
+    `https://igor.rstest.online/wp-json/wp/v2/posts`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Basic " + btoa("AI-Posts-Generator:MJ9L qiNT BZju T5J3 3qaJ s1xs")
+      },
+      body: JSON.stringify({
+        slug: "testpost32",
+        title: "testpost32",
+        status: "publish",
+      }),
+    }
   );
-  const postJson = await response.json();
-  const featuredmedia = postJson._embedded?.["wp:featuredmedia"]?.[0];
-  return featuredmedia.source_url;
+  const responseJson = await response.json();
+  console.log(responseJson);
 }
-console.log(
-  await getImageUrlById2(
-    33,
-    "http://igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link/"
-  )
-);
+
+sendPost();
