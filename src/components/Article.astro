@@ -1,9 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import '@fontsource/gugi';
-import '@fontsource/roboto';
-
-
+import "@fontsource/gugi";
+import "@fontsource/roboto";
 
 const {
   slug = "test",
@@ -19,22 +17,20 @@ function shortText(inputText: string, maxLength: number) {
 ---
 
 <article
-  class="w-100 max-sm:w-[80%] max-md:w-110 max-lg:w-82 bg-[#354eaf] text-[#fffffd] border-gray-200 rounded-lg shadow-xl"
+  class="w-100 max-sm:w-[80%] max-md:w-110 max-lg:w-82 bg-[#354eaf] text-[#fffffd] border-gray-200 rounded-lg shadow-2xl"
 >
-  <a href="#">
-    <Image
-      loading="lazy"
-      class="aspect-3/2 object-cover ... rounded-t-lg w-full"
-      src={photoUrl}
-      alt={title}
-      width="400"
-      height="225"
-    />
-  </a>
+  <Image
+    loading="lazy"
+    class="aspect-3/2 object-cover ... rounded-t-lg w-full"
+    src={photoUrl}
+    alt={title}
+    width="400"
+    height="225"
+  />
   <div class="p-5">
     <a href="#">
       <h5
-        class="h-16 mb-2 text-2xl font-normal font-[roboto] tracking-normal shortText"
+        class="h-16 mb-2 text-2xl font-semiblod font-[roboto] tracking-normal shortText"
       >
         {title}
       </h5>
@@ -45,7 +41,7 @@ function shortText(inputText: string, maxLength: number) {
     />
     <a
       href={`/${slug}/`}
-      class="inline-flex items-center font-[roboto] px-3 py-2 text-sm font-semibold tracking-wide text-center text-[#f1f1e3] rounded-lg bg-[#576bc7e1] hover:bg-[#7684c28c] duration-100 ease-in "
+      class="inline-flex items-center font-[bungee] px-3 py-2 text-sm font-light tracking-wider text-center text-[#f1f1e3] rounded-lg bg-[#506ef1e1] hover:bg-[#506ef1a9] duration-50 ease-in"
     >
       READ MORE
       <svg

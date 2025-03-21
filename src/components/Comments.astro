@@ -13,15 +13,15 @@ const commentsList = Array.isArray(comments) ? comments : [];
 ---
 
 <div data-pagefind-ignore
-  class="comments-section w-[95%] mx-auto max-w-270 flex flex-row rounded-4xl justify-between my-8 bg-[#416745] shadow-2xl text-[#e6e5d8] p-10"
+  class="comments-section w-[95%] mx-auto max-w-270 flex flex-row max-sm:flex-col rounded-4xl justify-between my-8 bg-[#354eaf] shadow-2xl text-[#faf9f5] p-10"
 >
-  <div class="w-[calc(100%-19rem)]">
-    <h1 class="text-3xl font-[bungee] mb-5">Comments ({commentsList.length})</h1>
+  <div class="w-[calc(100%-19rem)] max-sm:w-full">
+    <h1 class="text-3xl font-[bungee] tracking-wide mb-5">Comments ({commentsList.length})</h1>
     {
       commentsList.map((comment) => (
         <div class="comment w-full mb-5 ml-2">
           <div class="comment-meta">
-            <span class="author text-xl font-[bungee]">
+            <span class="author text-xl font-[bungee] tracking-wide">
               {comment.author_name}
             </span>
             <span class="date">
@@ -35,26 +35,26 @@ const commentsList = Array.isArray(comments) ? comments : [];
     }
   </div>
 
-  <div class="comment-form  w-60">
-    <h4 class="text-[1.5rem] font-[bungee]">Leave a comment</h4>
+  <div class="comment-form  w-60 max-sm:w-full">
+    <h4 class="text-[1.5rem] font-[bungee] mt-5">Leave a comment</h4>
     <form id="comment-form">
       <input type="hidden" name="post" value={inputPostId} />
-      <div class="form-group ml-2 mt-2">
+      <div class="form-group ml-2 max-sm:ml-0 mt-2">
         <label for="author" class="font-[bungee]">Username</label>
-        <input type="text" class="rounded-lg m-1 w-50 text-gray-600 border-2 border-white focus:border-gray-300 focus:ring-0" id="author" name="author_name" required />
+        <input type="text" class="rounded-lg m-1 w-50 max-sm:w-[calc(100%-2px)] text-gray-600 border-2 border-white focus:border-gray-300 focus:ring-0" id="author" name="author_name" required />
       </div>
-      <div class="form-group ml-2">
+      <div class="form-group ml-2 max-sm:ml-0 ">
         <label for="email" class="font-[bungee]">Email</label>
-        <input type="email" class="rounded-lg m-1 w-50 text-gray-600 border-2 border-white focus:border-gray-300 focus:ring-0" id="email" name="author_email" required />
+        <input type="email" class="rounded-lg m-1 w-50 max-sm:w-[calc(100%-2px)] text-gray-600 border-2 border-white focus:border-gray-300 focus:ring-0" id="email" name="author_email" required />
       </div>
-      <div class="form-group ml-2">
+      <div class="form-group ml-2 max-sm:ml-0 ">
         <label for="content" class="font-[bungee]">Comment</label>
-        <textarea id="content" class="rounded-lg m-1 w-50 text-gray-600 border-2 border-white focus:border-gray-300 focus:ring-0" name="content" value="Comment" required></textarea>
+        <textarea id="content" class="rounded-lg m-1 w-50 max-sm:w-[calc(100%-2px)] text-gray-600 border-2 border-white focus:border-gray-300 focus:ring-0" name="content" value="Comment" required></textarea>
       </div>
-      <div class="w-full flex justify-center">
+      <div class="w-full flex justify-center mt-6">
         <button
         type="submit"
-        class="inline-flex items-center font-[bungee] px-3 py-2 text-sm font-extralight text-center text-[#f1f1e3]  rounded-lg bg-[#2b422fb7]"
+        class="inline-flex items-center font-[bungee] px-3 py-2 text-sm font-extralight text-center text-[#f1f1e3]  rounded-lg bg-[#506ef1e1] hover:bg-[#506ef1a9] duration-50 ease-in "
         >Submit Comment</button
       >
       </div>

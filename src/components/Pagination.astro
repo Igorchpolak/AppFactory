@@ -29,13 +29,13 @@ for (let i = startPage; i <= endPage; i++) {
       {prevUrl ? (
         <a 
           href={prevUrl} 
-          class="px-3 py-2 rounded-lg bg-[#416644] hover:bg-[#416644ec] text-gray-700 dark:text-gray-200"
+          class="px-3 py-2 rounded-lg bg-[#354eaf] hover:bg-[#354eafec] text-gray-700 dark:text-gray-200"
           aria-label="Go to previous page"
         >
           &laquo;
         </a>
       ) : (
-        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#335037] text-[#e2e1d3]">
+        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#4459afc7] text-[#f1f1e3]">
           &laquo;
         </span>
       )}
@@ -66,8 +66,8 @@ for (let i = startPage; i <= endPage; i++) {
         <a 
           href={num === 1 ? `/` : `/${num}`} 
           class={`px-3 py-2 rounded-lg ${num === currentPage 
-            ? 'text-[#e6e5d8] bg-[#5a8a5e] hover:bg-[#416644ec] font-[bungee]' 
-            : 'bg-[#416644] hover:bg-[#416644ec] text-[#e6e5d8] font-[bungee]'}`}
+            ? 'text-[#e6e5d8] bg-[#163ce6e1] hover:bg-[#354eafec] font-[bungee]' 
+            : 'bg-[#354eaf] hover:bg-[#354eafec] text-[#e6e5d8] font-[bungee]'}`}
           aria-current={num === currentPage ? 'page' : undefined}
         >
           {num}
@@ -99,13 +99,13 @@ for (let i = startPage; i <= endPage; i++) {
       {nextUrl ? (
         <a 
           href={nextUrl} 
-          class="px-3 py-2 rounded-lg bg-[#416644] hover:bg-[#416644ec] text-[#e2e1d3]"
+          class="px-3 py-2 rounded-lg bg-[#354eaf] hover:bg-[#354eafec] text-[#f1f1e3]"
           aria-label="Go to next page"
         >
           &raquo;
         </a>
       ) : (
-        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#335037] text-[#e2e1d3]">
+        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#4459afc7] text-[#f1f1e3]">
           &raquo;
         </span>
       )}

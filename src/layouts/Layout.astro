@@ -16,9 +16,18 @@ const {metaDescription,title
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+    
     <meta name="description" content={metaDescription}>
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HK0WSG4V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-D8HK0WSG4V');
+  </script>
     <title>{title}</title>
   </head>
   <body
@@ -32,5 +41,6 @@ const {metaDescription,title
     <MyFooter/>
   </body>
   <script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
+  
 </html>
 

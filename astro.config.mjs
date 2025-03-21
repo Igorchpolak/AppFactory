@@ -6,6 +6,8 @@ import netlify from "@astrojs/netlify";
 
 import sitemap from "@astrojs/sitemap";
 
+import partytown from "@astrojs/partytown";
+
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
@@ -14,20 +16,17 @@ export default defineConfig({
   build: {
     format: "file",
   },
-  site: "https://wheelworks.netlify.app/",
-  integrations: [
-    pagefind({
-      indexerOptions: {
-        // Tell Pagefind to be more verbose for debugging
-        verbose: true,
-        // Exclude problematic elements if needed
-        excludeSelectors: ["nav", "footer", ".navigation", ".sidebar"],
-        // Force Pagefind to treat your content as static HTML
-        forceLanguage: "en",
-      },
-    }),
-    sitemap(),
-  ],
+  site: "https://app-factory.netlify.app/",
+  integrations: [pagefind({
+    indexerOptions: {
+      // Tell Pagefind to be more verbose for debugging
+      verbose: true,
+      // Exclude problematic elements if needed
+      excludeSelectors: ["nav", "footer", ".navigation", ".sidebar"],
+      // Force Pagefind to treat your content as static HTML
+      forceLanguage: "en",
+    },
+  }), sitemap(), partytown()],
 
   env: {
     schema: {
@@ -44,7 +43,7 @@ export default defineConfig({
     },
   },
   image: {
-    domains: ["igor.z0fil5dsgi-xlm41ok1r6dy.p.temp-site.link"],
+    domains: ["https://igor.rstest.online"],
   },
   adapter: netlify(),
 });
