@@ -6,7 +6,7 @@ import "@fontsource/gugi";
 import "@fontsource/roboto";
 import "@fontsource/bungee";
 
-const { metaDescription, title } = Astro.props;
+const { metaDescription, title, photoUrl } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,8 +23,7 @@ const { metaDescription, title } = Astro.props;
       href="/sitemap-index.xml"
     /><meta name="generator" content={Astro.generator} /><script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-D8HK0WSG4V"
-    />
+      src="https://www.googletagmanager.com/gtag/js?id=G-D8HK0WSG4V"></script>
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -34,8 +33,27 @@ const { metaDescription, title } = Astro.props;
 
       gtag("config", "G-D8HK0WSG4V");
     </script>
-    <title>{title}</title>
-    </head>
+<!-- HTML Meta Tags -->
+<title>App-Factory</title>
+<meta name="description" content="Blog about IT, apps development and ERP systems.">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://app-factory.netlify.app">
+<meta property="og:type" content="website">
+<meta property="og:title" content="App-Factory">
+<meta property="og:description" content="Blog about IT, apps development and ERP systems.">
+<meta property="og:image" content="https://opengraph.b-cdn.net/production/images/abdded22-9593-4c4f-8c8b-fe1bce6cfb46.png?token=LhQIbTJvXXEMMFFDdBdbcT6ZAYf8xfPQAnkZ6SPi2oU&height=600&width=900&expires=33278823799">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="app-factory.netlify.app">
+<meta property="twitter:url" content="https://app-factory.netlify.app">
+<meta name="twitter:title" content="App-Factory">
+<meta name="twitter:description" content="Blog about IT, apps development and ERP systems.">
+<meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/abdded22-9593-4c4f-8c8b-fe1bce6cfb46.png?token=LhQIbTJvXXEMMFFDdBdbcT6ZAYf8xfPQAnkZ6SPi2oU&height=600&width=900&expires=33278823799">
+
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
+  </head>
 
   <body class="bg-[#faf9f5] w-full flex flex-col min-h-screen">
     <Header />
