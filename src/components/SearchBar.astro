@@ -2,19 +2,17 @@
 import Search from "astro-pagefind/components/Search";
 ---
 
-<div class="container mx-auto px-4 h-26 w-[80%] ">
+<div class="container mx-auto px-4 h-26 w-[80%]">
   <div class="searchContainer">
     <Search
       id="search"
       className="pagefind-ui"
-      uiOptions={{ showImages: true }}
+      uiOptions={{ showImages: true}}
     />
   </div>
 </div>
 
 <style is:global>
-
-  
   .searchContainer {
     z-index: 10;
     position: absolute;
@@ -22,27 +20,29 @@ import Search from "astro-pagefind/components/Search";
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-
   }
 
-  /* Tailwind-inspired search bar styling */
+  /* Tailwind-inspired search bar styling */j
   .pagefind-ui {
     --pagefind-ui-scale: 1;
-    --pagefind-ui-primary: #4f46e5; /* indigo-600 */
+    --pagefind-ui-primary: #354eaf; /* indigo-600 */
     --pagefind-ui-text: #111827; /* gray-900 */
     --pagefind-ui-background: #fffffff8;
     --pagefind-ui-popup-background: #ffffff;
     --pagefind-ui-border: #e5e7eb; /* gray-200 */
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 0.5rem; /* rounded-lg */
-    --pagefind-ui-font: 'ui-sans-serif', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --pagefind-ui-font: "ui-sans-serif", system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     /* background-color: red; */
     height: 3rem;
     width: 100%;
   }
 
   .pagefind-ui .pagefind-ui__form {
-    box-shadow: 0 1px 7px 1px rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+    box-shadow:
+      0 1px 7px 1px rgba(0, 0, 0, 0.1),
+      0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
     border-radius: 0.5rem; /* rounded-lg */
     overflow: hidden;
   }
@@ -61,12 +61,12 @@ import Search from "astro-pagefind/components/Search";
 
   .pagefind-ui .pagefind-ui__input:focus {
     outline: none;
-    border-color: #4f46e5; /* indigo-600 */
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); /* ring-2 ring-indigo-200 */
+    border-color: #354eaf; /* indigo-600 */
+    box-shadow: 0 0 0 3px rgba(190, 190, 190, 0.1); /* ring-2 ring-indigo-200 */
   }
 
   .pagefind-ui .pagefind-ui__button {
-    background-color: #4f46e5; /* indigo-600 */
+    background-color: #354eaf; /* indigo-600 */
     color: white;
     border-radius: 0.375rem; /* rounded-md */
     padding: 0.5rem 1rem;
@@ -76,17 +76,20 @@ import Search from "astro-pagefind/components/Search";
   }
 
   .pagefind-ui .pagefind-ui__button:hover {
-    background-color: #4338ca; /* indigo-700 */
+    background-color: #4662db;
+    color: white;
+    border-color: white;
   }
 
   .pagefind-ui .pagefind-ui__drawer {
-    color: red;
+    color: black;
     padding: 1rem;
-    background-color: #fffffff8 !important;
-    border: 1px solid #e5e7eb; /* gray-200 */
+    background-color: #ffffff !important;
     border-radius: 0.5rem; /* rounded-lg */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-    margin-top: 0.5rem;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    margin-top: -1.25rem;
   }
 
   .pagefind-ui .pagefind-ui__message {
@@ -111,5 +114,12 @@ import Search from "astro-pagefind/components/Search";
     font-size: 0.875rem;
     line-height: 1.5rem;
     margin-top: 0.25rem;
+  }
+
+  .pagefind-ui .pagefind-ui__result-excerpt mark {
+    color: white;
+    background-color: #354eaf;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
   }
 </style>
