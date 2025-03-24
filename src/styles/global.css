@@ -1,21 +1,18 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
-@import "@fontsource/roboto";
-@import '@fontsource/rammetto-one';
 
-
-@plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
-
-*{
-    position: relative;
+* {
+  position: relative;
 }
 
 .hidden {
-    display: none;
-  }
+  display: none;
+}
 
-  @theme{
-    --font-sans: 'roboto','sans-serif';
-    --font-mono: 'rammetto-one', 'SFMono-Regular';
-  }
+.shortText {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
