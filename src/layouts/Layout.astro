@@ -5,6 +5,7 @@ import MyFooter from "../components/MyFooter.astro";
 import "@fontsource/gugi";
 import "@fontsource/roboto";
 import "@fontsource/bungee";
+import { SEO } from "astro-seo";
 import { getImageUrlById } from "../scripts/scripts.js";
 import { WORDPRESS_REST_API_URL } from "astro:env/client";
 
@@ -16,6 +17,7 @@ const {
   title = "App-Factory",
   id,
 } = Astro.props;
+
 
 const photoUrl = id
   ? await getImageUrlById(id, WORDPRESS_REST_API_URL)
@@ -47,37 +49,17 @@ const photoUrl = id
       gtag("config", "G-D8HK0WSG4V");
     </script>
 
-    <!-- HTML Meta Tags -->
-    <title>App-Factory</title>
-    <meta
-      name="description"
-      content="Blog about IT, apps development and ERP systems."
-    />
-
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://app-factory.netlify.app" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="App-Factory" />
-    <meta property="og:description" content={metaDescription} />
-    <meta property="og:image" content={photoUrl} />
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="app-factory.netlify.app" />
-    <meta property="twitter:url" content="https://app-factory.netlify.app" />
-    <meta name="twitter:title" content="App-Factory" />
-    <meta name="twitter:description" content={metaDescription} />
-    <meta name="twitter:image" content={photoUrl} />
-
-    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+    <title>{title}</title>
+    
   </head>
 
   <body class="bg-[#faf9f5] w-full flex flex-col min-h-screen">
+    
     <Header />
-      <div class="">
-        <slot />
-      </div>
+    <div class="">
+      <slot />
+    </div>
     <MyFooter />
-  </body>
-  <script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
+  </body><script src="../../node_modules/flowbite/dist/flowbite.min.js"
+  ></script>
 </html>

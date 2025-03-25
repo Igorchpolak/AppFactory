@@ -97,7 +97,7 @@ const url = {
               slug={post.slug}
               date={new Date(post.date).toLocaleDateString()}
               photoUrl={
-                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://placehold.co/600x400"
+                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/placeholder.webp"
               }
             />
           ))
