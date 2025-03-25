@@ -5,7 +5,7 @@ import MyFooter from "../components/MyFooter.astro";
 import "@fontsource/gugi";
 import "@fontsource/roboto";
 import "@fontsource/bungee";
-import { SEO } from "astro-seo";
+import { OgImage } from "astro-opengraph-image/components";
 import { getImageUrlById } from "../scripts/scripts.js";
 import { WORDPRESS_REST_API_URL } from "astro:env/client";
 
@@ -17,7 +17,6 @@ const {
   title = "App-Factory",
   id,
 } = Astro.props;
-
 
 const photoUrl = id
   ? await getImageUrlById(id, WORDPRESS_REST_API_URL)
@@ -50,11 +49,15 @@ const photoUrl = id
     </script>
 
     <title>{title}</title>
-    
+    <OgImage>
+      <div class="flex flex-col justify-center p-8 shadow-2xs h-full w-full text-white bg-[linear-gradient(90deg,_rgba(46,104,157,1)_0%,_rgba(9,9,121,1)_37%,_rgba(3,178,213,1)_97%)]">
+        <h1>App-Factory</h1>
+        <p>{metaDescription}</p>
+      </div>
+    </OgImage>
   </head>
 
   <body class="bg-[#faf9f5] w-full flex flex-col min-h-screen">
-    
     <Header />
     <div class="">
       <slot />
