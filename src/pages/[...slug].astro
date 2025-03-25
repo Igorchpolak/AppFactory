@@ -20,6 +20,7 @@ export async function getStaticPaths() {
       );
       const postJson = await response.json();
       const post = {
+
         photoUrl: getImageUrlById(id, WORDPRESS_REST_API_URL),
         categories: postJson.categories,
         title: postJson.title.rendered,
@@ -45,7 +46,7 @@ export async function getStaticPaths() {
 const { id, post, relatedPosts } = Astro.props;
 ---
 
-<Layout metaDescription={post.title} title={post.title} photoUrl={post.photoUrl}>
+<Layout metaDescription={post.title} title={post.title} id={id}>
   <article
     data-pagefind-body
     class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-4xl flex-col my-8 bg-[#354eaf] shadow-2xl text-[#faf9f5] font-[roboto]"
