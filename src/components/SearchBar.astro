@@ -2,25 +2,17 @@
 import Search from "astro-pagefind/components/Search";
 ---
 
-<div class="container mx-auto px-4 h-26 w-[80%]">
-  <div class="searchContainer">
+<!-- <div class="container mx-auto px-4 h-26 w-[80%]"> -->
+  <div class="searchContainer my-8 mx-auto w-[80%]">
     <Search
       id="search"
       className="pagefind-ui"
       uiOptions={{ showImages: true}}
     />
   </div>
-</div>
+<!-- </div> -->
 
 <style is:global>
-  .searchContainer {
-    z-index: 10;
-    position: absolute;
-    top: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-  }
 
   /* Tailwind-inspired search bar styling */j
   .pagefind-ui {

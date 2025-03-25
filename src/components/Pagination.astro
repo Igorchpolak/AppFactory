@@ -22,93 +22,110 @@ for (let i = startPage; i <= endPage; i++) {
 }
 ---
 
-<nav class="flex justify-center my-8 w-full 2xl:w-[calc(100vw-1.2rem)]" aria-label="Pagination">
+<nav
+  class="flex justify-center my-8 w-full 2xl:w-[calc(100vw-1.2rem)]"
+  aria-label="Pagination"
+>
   <ul class="flex items-center space-x-1">
     <!-- Previous button -->
     <li>
-      {prevUrl ? (
-        <a 
-          href={prevUrl} 
-          class="px-3 py-2 rounded-lg bg-[#354eaf] hover:bg-[#354eafec] text-gray-700 dark:text-gray-200"
-          aria-label="Go to previous page"
-        >
-          &laquo;
-        </a>
-      ) : (
-        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#4459afc7] text-[#f1f1e3]">
-          &laquo;
-        </span>
-      )}
+      {
+        prevUrl ? (
+          <a
+            href={prevUrl}
+            class="px-3 py-2 rounded-lg bg-[#354eaf] hover:bg-[#354eafec] text-gray-700 dark:text-gray-200"
+            aria-label="Go to previous page"
+          >
+            &laquo;
+          </a>
+        ) : (
+          <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#4459afc7] text-[#f1f1e3]">
+            &laquo;
+          </span>
+        )
+      }
     </li>
-    
+
     <!-- Page 1 and ellipsis if needed -->
-    {startPage > 1 && (
-      <>
-        <li>
-          <a 
-            href={`/`} 
-            class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
-          >
-            1
-          </a>
-        </li>
-        {startPage > 2 && (
+    {
+      startPage > 1 && (
+        <>
           <li>
-            <span class="px-3 py-2 dark:text-gray-300">...</span>
+            <a
+              href={`/`}
+              class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+            >
+              1
+            </a>
           </li>
-        )}
-      </>
-    )}
-    
+          {startPage > 2 && (
+            <li>
+              <span class="px-3 py-2 dark:text-gray-300">...</span>
+            </li>
+          )}
+        </>
+      )
+    }
+
     <!-- Page numbers -->
-    {pageNumbers.map(num => (
-      <li>
-        <a 
-          href={num === 1 ? `/` : `/${num}`} 
-          class={`px-3 py-2 rounded-lg ${num === currentPage 
-            ? 'text-[#e6e5d8] bg-[#163ce6e1] hover:bg-[#354eafec] font-[bungee]' 
-            : 'bg-[#354eaf] hover:bg-[#354eafec] text-[#e6e5d8] font-[bungee]'}`}
-          aria-current={num === currentPage ? 'page' : undefined}
-        >
-          {num}
-        </a>
-      </li>
-    ))}
-    
-    <!-- Ellipsis and last page if needed -->
-    {endPage < lastPage && (
-      <>
-        {endPage < lastPage - 1 && (
+    {
+      pageNumbers
+        .filter((num) => num > currentPage - 3 && num < currentPage + 3)
+        .map((num) => (
           <li>
-            <span class="px-3 py-2 dark:text-gray-300">...</span>
+            <a
+              href={num === 1 ? `/` : `/${num}`}
+              class={`px-3 py-2 rounded-lg ${
+                num === currentPage
+                  ? "text-[#e6e5d8] bg-[#163ce6e1] hover:bg-[#354eafec] font-[bungee]"
+                  : "bg-[#354eaf] hover:bg-[#354eafec] text-[#e6e5d8] font-[bungee]"
+              }`}
+              aria-current={num === currentPage ? "page" : undefined}
+            >
+              {num}
+            </a>
           </li>
-        )}
-        <li>
-          <a 
-            href={`/${lastPage}`} 
-            class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
-          >
-            {lastPage}
-          </a>
-        </li>
-      </>
-    )}
-    
+        ))
+    }
+
+    <!-- Ellipsis and last page if needed -->
+    {
+      endPage < lastPage && (
+        <>
+          {endPage < lastPage - 1 && (
+            <li>
+              <span class="px-3 py-2 dark:text-gray-300">...</span>
+            </li>
+          )}
+          <li>
+            <a
+              href={`/${lastPage}`}
+              class="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
+            >
+              {lastPage}
+            </a>
+          </li>
+        </>
+      )
+    }
+
     <!-- Next button -->
     <li>
-      {nextUrl ? (
-        <a 
-          href={nextUrl} 
-          class="px-3 py-2 rounded-lg bg-[#354eaf] hover:bg-[#354eafec] text-[#f1f1e3]"
-          aria-label="Go to next page"
-        >
-          &raquo;
-        </a>
-      ) : (
-        <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#4459afc7] text-[#f1f1e3]">
-          &raquo;
-        </span>
-      )}
+      {
+        nextUrl ? (
+          <a
+            href={nextUrl}
+            class="px-3 py-2 rounded-lg bg-[#354eaf] hover:bg-[#354eafec] text-[#f1f1e3]"
+            aria-label="Go to next page"
+          >
+            &raquo;
+          </a>
+        ) : (
+          <span class="px-3 py-2 rounded-lg cursor-not-allowed bg-[#4459afc7] text-[#f1f1e3]">
+            &raquo;
+          </span>
+        )
+      }
     </li>
   </ul>
 </nav>
