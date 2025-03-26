@@ -30,8 +30,7 @@ export default defineConfig({
     metaTags(),
     opengraphImage({
       // what color do you want your background to be?
-      background: "#000000",
-
+      // background: "#ffffff",
       // what size do you want your images to be?
       // 1200x630 is a good default across platforms,
       // and 3x scale is a convenient choice.
@@ -43,13 +42,29 @@ export default defineConfig({
       // weights and variants you want to use.
       fonts: [
         {
-          name: "Roboto",
+          name: "Bungee",
           data: await readFile(
-            "node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"
+            "node_modules/@fontsource/bungee/files/bungee-latin-400-normal.woff"
           ),
           style: "normal",
           weight: 400,
         },
+        // {
+        //   name: "Roboto",
+        //   data: await readFile(
+        //     "node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"
+        //   ),
+        //   style: "normal",
+        //   weight: 400,
+        // },
+        {
+          name: "Gugi",
+          data: await readFile(
+            "node_modules/@fontsource/gugi/files/gugi-3-400-normal.woff"
+          ),
+          style: "normal",
+          weight: 400,
+        }
       ],
     }),
   ],

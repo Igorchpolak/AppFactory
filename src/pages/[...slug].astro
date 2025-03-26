@@ -46,7 +46,7 @@ export async function getStaticPaths() {
 const { id, post, relatedPosts } = Astro.props;
 ---
 
-<Layout metaDescription={post.title} title={post.title} id={id}>
+<Layout metaDescription={post.title} title={post.title} description={post.content} id={id}>
   <article
     data-pagefind-body
     class="w-[95%] mx-auto max-w-270 flex justify-center items-center rounded-4xl flex-col my-8 bg-[#354eaf] shadow-2xl text-[#faf9f5] font-[roboto]"
