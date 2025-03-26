@@ -1,0 +1,75 @@
+---
+// src/components/SwiperCarousel.astro
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+---
+
+<div class="swiper-container mx-auto">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="https://placehold.co/600x400" alt="Slide 1" class="w-full h-[400px] object-cover">
+    </div>
+    <div class="swiper-slide">
+      <img src="https://placehold.co/600x400" alt="Slide 2" class="w-full h-[400px] object-cover">
+    </div>
+    <div class="swiper-slide">
+      <img src="https://placehold.co/600x400" alt="Slide 3" class="w-full h-[400px] object-cover">
+    </div>
+    <div class="swiper-slide">
+      <img src="https://placehold.co/600x400" alt="Slide 4" class="w-full h-[400px] object-cover">
+    </div>
+  </div>
+  
+  <!-- Navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+  
+  <!-- Pagination -->
+  <div class="swiper-pagination"></div>
+</div>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  
+  // Initialize Swiper
+  const swiper = new Swiper('.swiper-container', {
+    modules: [Navigation, Pagination, Autoplay],
+    
+    // Navigation
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    
+    // Pagination
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    
+    // Autoplay
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    
+    // Other options
+    loop: true,
+    spaceBetween: 10,
+    slidesPerView: 1,
+  });
+</script>
+
+<style>
+  /* Optional: Custom styles for navigation and pagination */
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #333;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background-color: #333;
+  }
+</style>

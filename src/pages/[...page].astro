@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Article from "../components/Article.astro";
 import Pagination from "../components/Pagination.astro";
 import SearchBar from "../components/SearchBar.astro";
+import Jumbotron from "../components/jumbotron.astro";
 import { WORDPRESS_REST_API_URL, POSTS_PER_PAGE } from "astro:env/client";
 
 export async function getStaticPaths() {
@@ -52,6 +53,8 @@ const url = {
 ---
 
 <Layout metaDescription="Blog about IT, apps development and ERP systems." title="App-Factory">
+  <Jumbotron/>
+  
   <SearchBar />
   <div class="container mx-auto 2xl:mx-0 w-[calc(100vw-1.2rem)]">
     <div class="min-h-[calc(100vh-19.7rem)] 2xl:w-[calc(100vw-1.5rem)]">

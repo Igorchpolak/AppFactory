@@ -1,0 +1,130 @@
+---
+import { getCategoriesArray } from "../scripts/scripts";
+import CategoryCard from "../components/CategoryCard.astro";
+import SwiperCarousel from "../components/SwiperCarousel.astro"
+import { WORDPRESS_REST_API_URL } from "astro:env/client";
+
+var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
+var index = 1;
+---
+
+<!-- Jumbotron -->
+<div
+  class="relative flex flex-col justify-between h-[calc(100vh-3rem)] w-full overflow-hidden text-center text-white"
+>
+  <div class="h-[80%]">
+    <SwiperCarousel/>
+  </div>
+  <div class="h-20 w-full flex flex-col justify-center items-center">
+    <div class="w-full overflow-hidden relative">
+      <ul class="wraper w-full justify-center h-16 aria-hidden">
+        {
+          categories.map((item) => (
+            <li class={`item item${index++}`}>
+              <CategoryCard slug={item.category} title={item.name} />
+            </li>
+          ))
+        }
+        {
+          categories.map((item) => (
+            <li class={`item item${index++}`}>
+              <CategoryCard slug={item.category} title={item.name} />
+            </li>
+          ))
+        }
+        {
+            categories.map((item) => (
+              <li class={`item item${index++}`}>
+                <CategoryCard slug={item.category} title={item.name} />
+              </li>
+            ))
+          }
+      </ul>
+    </div>
+
+    <!-- Jumbotron -->
+  </div>
+</div>
+
+<style>
+  .wrapper {
+    width: 100%;
+    margin-inline: auto;
+    position: relative;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1) 20%,
+      rgba(0, 0, 0, 1) 80%,
+      rgba(0, 0, 0, 0)
+    );
+  }
+
+  @keyframes scrollLeft {
+    to {
+      left: -14rem;
+    }
+  }
+
+  .item {
+    position: absolute;
+    height: 5rem;
+    width: -14em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: max(calc(14rem * 12), 100%);
+    animation-name: scrollLeft;
+    animation-duration: 120s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .item1 {
+    animation-delay: calc(120s /12 * (12 - 1) * -1);
+  }
+
+  .item2 {
+    animation-delay: calc(120s /12 * (12 - 2) * -1);
+  }
+
+  .item3 {
+    animation-delay: calc(120s /12 * (12 - 3) * -1);
+  }
+
+  .item4 {
+    animation-delay: calc(120s /12 * (12 - 4) * -1);
+  }
+
+  .item5 {
+    animation-delay: calc(120s /12 * (12 - 5) * -1);
+  }
+
+  .item6 {
+    animation-delay: calc(120s /12 * (12 - 6) * -1);
+  }
+
+  .item7 {
+    animation-delay: calc(120s /12 * (12 - 7) * -1);
+  }
+
+  .item8 {
+    animation-delay: calc(120s /12 * (12 - 8) * -1);
+  }
+  .item9 {
+    animation-delay: calc(120s /12 * (12 - 9) * -1);
+  }
+
+  .item10 {
+    animation-delay: calc(120s /12 * (12 - 10) * -1);
+  }
+
+  .item11 {
+    animation-delay: calc(120s /12 * (12 - 11) * -1);
+  }
+
+  .item12 {
+    animation-delay: calc(120s /12 * (12 - 12) * -1);
+  }
+</style>
