@@ -16,3 +16,11 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+.shortDescription {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 18; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

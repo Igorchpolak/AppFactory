@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+const {
+  title = "test",
+  description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni provident cupiditate dicta placeat, nemo sequi ut aspernatur! Delectus, assumenda voluptatibus! Cum, perferendis quidem? Dignissimos aperiam corporis, ratione hic minus modi!",
+  photoUrl = "https://placehold.co/600x400",
+} = Astro.props;
+
+function shortText(inputText: string, maxLength: number): string {
+  // Remove HTML tags using a more robust regex
+  const cleanText = inputText
+    .replace(/&#8220;/g, '"')   // Replace left double quotation mark
+    .replace(/&#8221;/g, '"')   // Replace right double quotation mark
+    .replace(/&#8212;/g, '—')   // Replace em dash
+    .replace(/&#8211;/g, '–')   // Replace en dash
+    .replace(/<\/?[^>]+(>|$)/g, '')  // Remove all HTML tags (opening and closing)
+    .replace(/\s+/g, ' ')       // Replace multiple whitespaces with a single space
+    .trim();                    // Remove leading and trailing whitespaces
+
+  // Check if cleaned text fits within maxLength
+  if (cleanText.length <= maxLength) {
+    return cleanText;
+  }
+
+  // Truncate and add ellipsis
+  return `${cleanText.substring(0, maxLength)}...`;
+}
+const descriptionToDisplay = shortText(description, 10000);
+---
+
+<div class="w-full h-full flex items-center justify-center gap-5">
+  <div
+    class="rounded-2xl h-full p-5 2xl:p-8 flex justify-between aspect-video bg-[#354eaf]"
+  >
+    <div class="flex flex-col justify-between w-[calc(100%-14.25rem)] 2xl:w-[calc(100%-31.25rem)]">
+      <h1 class="shortText font-[bungee] h-16 2xl:h-20 text-2xl 2xl:text-4xl text-left">{title}</h1>
+      <div class="h-[calc(100%-4.5rem)] 2xl:h-[calc(100%-5.5rem)] w-full">
+        <Image
+          class="rounded-lg h-full w-full aspect-4/3 object-cover"
+          src={photoUrl}
+          alt={title}
+          width="650"
+          height="400"
+        />
+      </div>
+    </div>
+    <div class="w-52 2xl:w-120 h-full">
+      <p class="h-[calc(100%-5rem)] 2xl:text-2xl text-left overflow-hidden">
+        {descriptionToDisplay}
+      </p>
+      <div class="h-20 w-full flex justify-end items-end">
+        <div
+          class="inline-flex items-center font-[bungee] px-3 py-2 font-light text-lg 2xl:text-2xl 2xl:hover:text-[1.75rem]  hover:text-[1.25rem] tracking-wider text-center text-black rounded-lg bg-white duration-300 ease-in"
+        >
+          <h2 class="">Learn more</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class=" flex flex-col justify-between mr-5">
+      <h1 class="shortText font-[bungee] text-left text-3xl">{title}</h1>
+      <img class="aspect-3/2 object-cover rounded-lg" src={photoUrl} />
+    </div>
+    <div class="h-full w-[600px] flex flex-col justify-between items-end">
+      <p class="text-left text-xl ">{descriptionToDisplay}</p>
+      <div
+        class="inline-flex items-center font-[bungee] px-3 py-2 text-sm font-light tracking-wider text-center text-black rounded-lg bg-white duration-50 ease-in"
+      >
+        <h2 class="text-lg">Learn more</h2>
+      </div> -->
+  </div>
+</div>

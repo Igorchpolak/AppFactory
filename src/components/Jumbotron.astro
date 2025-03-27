@@ -5,6 +5,8 @@ import SwiperCarousel from "../components/SwiperCarousel.astro"
 import { WORDPRESS_REST_API_URL } from "astro:env/client";
 
 var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
+const newPosts = await fetch(`${WORDPRESS_REST_API_URL}wp-json/wp/v2/posts?_embed`);
+const newPostsJson = await newPosts.json();
 var index = 1;
 ---
 
@@ -12,8 +14,8 @@ var index = 1;
 <div
   class="relative flex flex-col justify-between h-[calc(100vh-3rem)] w-full overflow-hidden text-center text-white"
 >
-  <div class="h-[80%]">
-    <SwiperCarousel/>
+  <div class="h-[calc(100%-5rem)]">
+    <SwiperCarousel postsArray={newPostsJson} />
   </div>
   <div class="h-20 w-full flex flex-col justify-center items-center">
     <div class="w-full overflow-hidden relative">
