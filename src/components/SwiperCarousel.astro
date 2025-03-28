@@ -10,9 +10,10 @@ const newPosts = await fetch(
 const newPostsJson = await newPosts.json();
 ---
 
-<main>
+<main class="relative h-full max-h-[20rem] sm:max-h-[31rem] lg:max-h-[37rem] min-[1900px]:max-h-[80rem]">
   <swiper-container
     class="mySwiper"
+    init="true"
     modules={[Navigation, Pagination]}
     pagination="true"
     speed="800"
@@ -39,23 +40,6 @@ const newPostsJson = await newPosts.json();
 </main>
 
 <style>
-  main {
-    position: relative;
-    height: 100%;
-  }
-
-  main {
-    /* background: #eee; */
-    font-family:
-      Helvetica Neue,
-      Helvetica,
-      Arial,
-      sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-    padding: 0;
-  }
 
   swiper-container {
     width: 100%;
@@ -65,7 +49,6 @@ const newPostsJson = await newPosts.json();
   swiper-slide {
     text-align: center;
     font-size: 18px;
-    /* background: #000; */
     display: flex;
     justify-content: center;
     align-items: center;
