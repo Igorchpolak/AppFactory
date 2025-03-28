@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 const {
   title = "test",
   description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni provident cupiditate dicta placeat, nemo sequi ut aspernatur! Delectus, assumenda voluptatibus! Cum, perferendis quidem? Dignissimos aperiam corporis, ratione hic minus modi!",
@@ -32,11 +31,11 @@ const descriptionToDisplay = shortText(description, 10000);
   class="w-full aspect-video h-full rounded-lg flex justify-center items-center"
 >
   <div
-    class="w-180 min-[1537px]:w-300 duration-200 ease-in rounded-lg aspect-video bg-cover bg-center flex shadow-2xl"
+    class="w-70 min-[425px]:w-85 sm:w-120  lg:w-180 min-[1900px]:w-300 duration-200 ease-in rounded-lg aspect-video bg-cover bg-center flex shadow-2xl"
     style={`background-image: url('${photoUrl}');`}
   >
-    <div class="p-3 min-[1537px]:p-5  flex items-end w-4/5">
-      <h1 class="text-2xl min-[1537px]:text-3xl text-white truncate bg-[#354eaf] font-[bungee] p-1 min-[1537px]:p-2 rounded-lg shadow-white">{title}</h1>
+    <div class="p-1 sm-p-1.5 lg:p-3 min-[1900px]:p-5  flex items-end w-4/5">
+      <h1 class=" text-[0.75rem] sm:text-[1rem] lg:text-2xl min-[1900px]:text-3xl text-white truncate bg-[#354eaf] font-[bungee] p-0.5 px-1.5  sm:p-1 min-[1900px]:p-2 rounded-lg shadow-white">{title}</h1>
     </div>
   </div>
 </div>

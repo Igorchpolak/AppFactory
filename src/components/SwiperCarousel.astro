@@ -1,8 +1,8 @@
 ---
 import BigArticle from "./BigArticle.astro";
 import { Navigation, Pagination } from 'swiper/modules';
-
 import { WORDPRESS_REST_API_URL } from "astro:env/client";
+
 
 const newPosts = await fetch(
   `${WORDPRESS_REST_API_URL}wp-json/wp/v2/posts?_embed`
@@ -18,7 +18,7 @@ const newPostsJson = await newPosts.json();
     speed="800"
     pagination-clickable="true"
     centered-slides="true"
-    space-between="80"
+    space-between="120"
     slides-per-view="2"
     autoplay-delay="4000"
   >
@@ -34,10 +34,8 @@ const newPostsJson = await newPosts.json();
       ))
     }
   </swiper-container>
+  <script src="../../swiper-init.js" defer></script>
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
-  ></script>
 </main>
 
 <style>
@@ -74,8 +72,10 @@ const newPostsJson = await newPosts.json();
     transform: scale(1);
     transition: all 0.8s ease;
   }
+
   .swiper-slide-active {
     transform: scale(1.15);
     transition: all 0.8s ease;
+    z-index: 100;
   }
 </style>
