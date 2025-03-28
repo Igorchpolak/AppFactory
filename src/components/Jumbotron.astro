@@ -3,11 +3,37 @@ import { getCategoriesArray } from "../scripts/scripts";
 import CategoryCard from "../components/CategoryCard.astro";
 import SwiperCarousel from "../components/SwiperCarousel.astro"
 import { WORDPRESS_REST_API_URL } from "astro:env/client";
+import BlogSlider from '../components/BlogSlider.astro';
+const blogPosts = [
+  {
+    date: '26 December 2019',
+    title: 'Lorem Ipsum Dolor',
+    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?',
+    imageUrl: 'https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp',
+    readMoreLink: '#'
+  },
+  {
+    date: '26 December 2019',
+    title: 'Lorem Ipsum Dolor 2',
+    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?',
+    imageUrl: 'https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/jason-leung-798979-unsplash.webp',
+    readMoreLink: '#'
+  },
+  {
+    date: '26 December 2019',
+    title: 'Lorem Ipsum Dolor 3',
+    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?',
+    imageUrl: 'https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp',
+    readMoreLink: '#'
+  }
+];
 
 var categories = await getCategoriesArray(WORDPRESS_REST_API_URL);
 const newPosts = await fetch(`${WORDPRESS_REST_API_URL}wp-json/wp/v2/posts?_embed`);
 const newPostsJson = await newPosts.json();
 var index = 1;
+
+
 ---
 
 <!-- Jumbotron -->
@@ -15,6 +41,7 @@ var index = 1;
   class="relative flex flex-col justify-between h-[calc(100vh-3rem)] w-full overflow-hidden text-center text-white"
 >
   <div class="h-[calc(100%-5rem)]">
+    <!-- <BlogSlider posts={blogPosts}/> -->
     <SwiperCarousel postsArray={newPostsJson} />
   </div>
   <div class="h-20 w-full flex flex-col justify-center items-center">

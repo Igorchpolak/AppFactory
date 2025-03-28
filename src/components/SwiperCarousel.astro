@@ -1,86 +1,81 @@
 ---
-const { postsArray } = Astro.props;
 import BigArticle from "./BigArticle.astro";
-// src/components/SwiperCarousel.astro
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { Navigation, Pagination } from 'swiper/modules';
+
+import { WORDPRESS_REST_API_URL } from "astro:env/client";
+
+const newPosts = await fetch(
+  `${WORDPRESS_REST_API_URL}wp-json/wp/v2/posts?_embed`
+);
+const newPostsJson = await newPosts.json();
 ---
 
-<div class="swiper-container mx-auto h-full max-w">
-  <div class="swiper-wrapper w-50 h-full aspect-video">
+<main>
+  <swiper-container
+    class="mySwiper"
+    modules={[Navigation, Pagination]}
+    pagination="true"
+    speed="800"
+    pagination-clickable="true"
+    centered-slides="true"
+    space-between="80"
+    slides-per-view="2"
+    autoplay-delay="4000"
+  >
     {
-      postsArray.map((post) => (
-        <div class="swiper-slide flex">
-          <BigArticle
-            title={post.title.rendered}
+      newPostsJson.map((post) => (
+        <swiper-slide>
+          <BigArticle title={post.title.rendered}
             description={post.content.rendered}
             photoUrl={
               post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-              "/placeholder.webp"
-            }
-          />
-        </div>
+              "/placeholder.webp"} />
+        </swiper-slide>
       ))
     }
-  </div>
+  </swiper-container>
 
-  <!-- Navigation buttons -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
-
-  <!-- Pagination -->
-  <div class="swiper-pagination"></div>
-</div>
-
-<script>
-  import Swiper from "swiper";
-  import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
-  // Initialize Swiper
-  const swiper = new Swiper(".swiper-container", {
-    modules: [Navigation, Pagination, Autoplay],
-
-    // Navigation
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    // Pagination
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-
-    // Autoplay
-    autoplay: {
-      delay: 300000,
-      disableOnInteraction: false,
-    },
-
-    // Other options
-    loop: true,
-    spaceBetween: 10,
-    slidesPerView: 1,
-  });
-</script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
+  ></script>
+</main>
 
 <style>
-  /* Optional: Custom styles for navigation and pagination */
-  .swiper-button-prev,
-  .swiper-button-next {
-    color: #333;
+  main {
+    position: relative;
+    height: 100%;
   }
 
-  .swiper-pagination-bullet-active {
-    background-color: #333;
-  }
-  .swiper-slide {
-    padding: 2.5rem;
+  main {
+    /* background: #eee; */
+    font-family:
+      Helvetica Neue,
+      Helvetica,
+      Arial,
+      sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
   }
 
-  .swiper-container {
-    /* height: 100%; */
+  swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    /* background: #000; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1);
+    transition: all 0.8s ease;
+  }
+  .swiper-slide-active {
+    transform: scale(1.15);
+    transition: all 0.8s ease;
   }
 </style>

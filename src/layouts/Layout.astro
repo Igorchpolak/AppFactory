@@ -46,8 +46,8 @@ const photoUrl = id
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
@@ -105,4 +105,13 @@ const photoUrl = id
     <MyFooter />
   </body><script src="../../node_modules/flowbite/dist/flowbite.min.js"
   ></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+  <script>
+    import { register } from "swiper/element/bundle";
+  
+    document.addEventListener("astro:page-load", () => {
+      register();
+    });
+  </script>
+
 </html>
